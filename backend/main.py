@@ -1,3 +1,4 @@
+import re
 from urllib import response
 from fastapi import FastAPI, responses
 from routes.user_routes import user_rutes
@@ -34,4 +35,4 @@ Db_insert_RP()
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
