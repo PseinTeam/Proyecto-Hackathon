@@ -8,14 +8,14 @@ from controllers.user_controllers import (
 )
 from services.jwt import write_token
 from database.db import get_db
-from models.schemas.user_schemas import UserCreate, CreateUsersRequest, LoginRequest, UpdateUserRequest
+from models.schemas.user_schemas import ShowUser, ShowUser500, UserCreate, CreateUsersRequest, LoginRequest, UpdateUserRequest
 from services.middleware_verification import get_user_info_by_id
 
 
 user_rutes = APIRouter(prefix='/Usuarios', tags=['Crud de Usuarios'])
 
 # Ruta para crear usuarios
-@user_rutes.post('/createUsers')
+@user_rutes.post('/createUsers', response_model=ShowUser, responses={500: {"model": ShowUser500, "description": "Error al crear usuario: {usuario}"}})
 async def create_users(request: CreateUsersRequest, db: Session = Depends(get_db)):
     users = []
     for i in range(request.num_usuarios):
@@ -145,4 +145,6 @@ async def change_name_route(id: int, new_name: str, db: Session = Depends(get_db
     if not change_name(id, new_name, db):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Failed to change name")
     return {"message": "El nombre de usuario fue correctamente cambiado"}
+
+
 

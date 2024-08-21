@@ -1,5 +1,7 @@
-from fastapi import FastAPI
+from urllib import response
+from fastapi import FastAPI, responses
 from routes.user_routes import user_rutes
+from routes.alert_routes import alert_router
 from routes.auth_routes import auth_router
 from fastapi.middleware.cors import CORSMiddleware
 import init_db
@@ -17,10 +19,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/", include_in_schema=False)
+def redirigir_docs():
+    return responses.RedirectResponse(url="/docs")
+
+
+app.include_router(alert_router)
 app.include_router(user_rutes)
 app.include_router(auth_router)
 
 Db_insert_RP()
+
+
 
 if __name__ == "__main__":
     import uvicorn

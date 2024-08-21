@@ -1,4 +1,7 @@
+from typing import Annotated
 from pydantic import BaseModel, Field, EmailStr
+
+from database.db import Base
 
 
 class UserBase(BaseModel):
@@ -32,3 +35,10 @@ class User(UserBase):
 
 class DBUser(User):
     password: str
+
+class ShowUser(BaseModel):
+    status: str
+    users: list[UserBase]
+
+class ShowUser500(BaseModel):
+    detail: Annotated[str, Field("Error al crear usuario: {usuario}")]

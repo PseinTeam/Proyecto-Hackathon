@@ -12,6 +12,8 @@ class Users(Base):
     password = Column(String)
     id_role = Column(Integer, ForeignKey('roles.id'))
 
+    alert_messages = relationship("AlertMessage", back_populates="user")
+
     # Relación muchos a uno con la tabla de roles
     rol = relationship("Rol", back_populates="users")
 
