@@ -1,8 +1,8 @@
-from models.roles_permisos import Rol
-from models.roles_permisos import Permisos
+from models.roles import Rol
+from models.permisos import Permisos
 from database.db import get_db
 from sqlalchemy.orm import Session
-from controllers.rol_permiso_controllers import agregar_permisos_iniciales, crear_super_admin
+from controllers.rol_permisos_controllers import agregar_permisos_iniciales, crear_super_admin
 
 
 
@@ -30,9 +30,6 @@ def permisos_insert(db: Session):
     exite_permiso_nombre={permiso.nombre_permiso for permiso in exite_permiso}
 
     permisos = [
-        Permisos(nombre_permiso="crear_empresa", descripcion="Permite la creacion de empresas"),
-        Permisos(nombre_permiso="eliminar_empresa", descripcion="Permite la eliminacion de empresas"),
-        Permisos(nombre_permiso="editar_empresa", descripcion="Permite la edicion de empresas"),
         Permisos(nombre_permiso="crear_usuario", descripcion="Permite la creacion de usuarios"),
         Permisos(nombre_permiso="editar_usuario", descripcion="Permite la edicion de usuarios"),
         Permisos(nombre_permiso="lee_usuario", descripcion="Permite la lectura de usuarios"),

@@ -2,15 +2,14 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from database.db import Base
 
-class Rol(Base):
-    __tablename__ = "roles"
+class Permisos(Base):
+    __tablename__ = "permisos"
 
     id = Column(Integer, primary_key=True, index=True)
-    nombre_rol = Column(String, unique=True)
+    nombre_permiso = Column(String, unique=True)
     descripcion = Column(String)
 
-    # Relación uno a muchos con la tabla de usuarios
-    users = relationship("Users", back_populates="rol")
-
-    # Relación muchos a muchos con la tabla de permisos
-    permisos = relationship("Permisos", secondary="roles_permisos", back_populates="roles")
+    # Relación muchos a muchos con la tabla de roles
+    roles = relationship("Rol", secondary="roles_permisos", back_populates="permisos")
+    # Relación muchos a muchos con la tabla de users_permisos
+    user_permisos = relationship("User_Permiso", back_populates="permiso", overlaps="users")

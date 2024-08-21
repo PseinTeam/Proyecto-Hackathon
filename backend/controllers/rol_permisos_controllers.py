@@ -9,7 +9,7 @@ from controllers.user_controllers import create_user
 
 def agregar_permisos_iniciales(db: Session):
     def asignar_permisos_rol_admin():
-        permisos_admin = db.query(Permisos).filter(Permisos.id > 3).all()
+        permisos_admin = db.query(Permisos).filter(Permisos.id > 0).all()
         rol_admin = db.query(Rol).filter(Rol.id == 2).first()
         if not rol_admin:
             raise ValueError("Role admin not found")
@@ -18,7 +18,7 @@ def agregar_permisos_iniciales(db: Session):
         db.commit()
 
     def asignar_permisos_rol_security():
-        permisos_security = db.query(Permisos).filter(Permisos.id >= 8).all()
+        permisos_security = db.query(Permisos).filter(Permisos.id >= 5).all()
         rol_security = db.query(Rol).filter(Rol.id == 3).first()
         if not rol_security:
             raise ValueError("Role security not found")
@@ -36,7 +36,7 @@ def agregar_permisos_iniciales(db: Session):
         db.commit()
 
     def asignar_permisos_rol_user():
-        permisos_user = db.query(Permisos).filter(Permisos.id == 12).all()
+        permisos_user = db.query(Permisos).filter(Permisos.id == 9).all()
         rol_user = db.query(Rol).filter(Rol.id == 4).first()
         if not rol_user:
             raise ValueError("Role user not found")
@@ -152,7 +152,7 @@ def crear_super_admin(db: Session):
             'id_role': 1
         }
         create_user(UserCreate(**user_data), db)
-    except:
+    except Exception:
         db.rollback()
         raise ValueError("Error al crear usuario")
     finally:
