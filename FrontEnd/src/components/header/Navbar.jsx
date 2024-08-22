@@ -54,12 +54,14 @@ export const Navbar = () => {
           <div className="col-md-3 text-end">
             <a href="/Login" className="LoginBtn">
               <button type="button" className="btn btn-outline-primary me-2">
-                Login
+                Inicio de Sesión
               </button>
             </a>
-            <button type="button" className="btn btn-primary">
-              Sign-up
-            </button>
+            <a href="/Register" className="RegisterBtn">
+              <button type="button" className="btn btn-primary">
+                Registro
+              </button>
+            </a>
           </div>
         </header>
       </div>

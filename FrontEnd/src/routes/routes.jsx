@@ -12,6 +12,7 @@ export const RoutesComponent = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/Changedata" element={<Changedata />} />
+      <Route path="/Register" element={<Register />} />
     </Routes>
   );
 };
