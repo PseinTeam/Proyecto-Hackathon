@@ -10,6 +10,7 @@ import { PanelPermisos } from "../components/Paneldepermisos/Permissionspanel.js
 import { Ambientrecognicion } from "../pages/Ambientrecognicion.jsx";
 import { Employeepanel } from "../components/Panelempleados/Employeepanel.jsx";
 import { Inspectionspanel } from "../components/Panelinspecciones/Inspectionspanel.jsx";
+import { Perfil } from "../pages/Perfil.jsx";
 
 export const RoutesComponent = () => {
   return (
@@ -25,6 +26,7 @@ export const RoutesComponent = () => {
       <Route path="/Ambientrecognicion" element={<Ambientrecognicion />} />
       <Route path="/Employeepanel" element={<Employeepanel />} />
       <Route path="/Inspectionspanel" element={<Inspectionspanel />} />
+      <Route path="/Perfil" element={<Perfil />} />
     </Routes>
   );
 };

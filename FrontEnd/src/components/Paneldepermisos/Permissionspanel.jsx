@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { UsuariosPermisos } from "./Userpermissions.jsx";
 import { Navbar } from "../header/Navbar.jsx";
+import Footer from "../Footer/Footer.jsx";
 
 export const PanelPermisos = () => {
   const [permissions, setPermissions] = useState([]);
@@ -192,6 +193,7 @@ export const PanelPermisos = () => {
           </table>
         </div>
       )}
+      <Footer />
     </div>
   );
 };

@@ -89,6 +89,35 @@ export const Navbar = () => {
                 </li>
               </ul>
             </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle px-2"
+                href="#"
+                id="panelDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Capacitaciones
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="panelDropdown">
+                <li>
+                  <a href="#" className="dropdown-item">
+                    Medidas de seguridad
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="dropdown-item">
+                    Leyes de construcción
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="dropdown-item">
+                    Concientización
+                  </a>
+                </li>
+              </ul>
+            </li>
 
             <li>
               <a
@@ -100,7 +129,7 @@ export const Navbar = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="nav-link px-2">
+              <a href="/Perfil" className="nav-link px-2">
                 Perfil
               </a>
             </li>
