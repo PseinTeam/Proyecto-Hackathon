@@ -35,8 +35,8 @@ export const Navbar = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="nav-link px-2">
-                Pricing
+              <a href="/Panelpermisos" className="nav-link px-2">
+                Panel de permisos
               </a>
             </li>
             <li>
