@@ -95,10 +95,39 @@ export const Navbar = () => {
               </ul>
             </li>
             {user?.rol?.nombre === "Admin" && (
-              <li>
-                <a href="/PanelPermisos" className="nav-link px-2">
-                  Panel de permisos
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle px-2"
+                  href="#"
+                  id="panelDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Paneles
                 </a>
+                <ul className="dropdown-menu" aria-labelledby="panelDropdown">
+                  <li>
+                    <a className="dropdown-item" href="/Panelpermisos">
+                      Panel de permisos
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/PanelEmergencias">
+                      Panel de emergencias
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/Employeepanel">
+                      Panel de empleados
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/Inspectionspanel">
+                      Panel de inspecciones
+                    </a>
+                  </li>
+                </ul>
               </li>
             )}
             {user?.rol?.nombre === "Admin" && (
@@ -108,6 +137,35 @@ export const Navbar = () => {
                 </a>
               </li>
             )}
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle px-2"
+                href="#"
+                id="panelDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Capacitaciones
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="panelDropdown">
+                <li>
+                  <a href="/Securitymeasurements" className="dropdown-item">
+                    Medidas de seguridad
+                  </a>
+                </li>
+                <li>
+                  <a href="/Constructionslaws" className="dropdown-item">
+                    Leyes de construcción
+                  </a>
+                </li>
+                <li>
+                  <a href="/Awareness" className="dropdown-item">
+                    Concientización
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li>
               <a
                 href="https://jorgito-76bcf3.zapier.app"
