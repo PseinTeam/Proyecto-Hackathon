@@ -6,7 +6,7 @@ import { CerrarSesion } from "../../components/CerrarSesion.jsx";
 
 export const Navbar = () => {
 
-  const { state } = useContext(AuthContext);
+  const { state, user } = useContext(AuthContext);
 
   console.log(state.logged);
   return (
@@ -41,11 +41,20 @@ export const Navbar = () => {
                 Inspecciones
               </a>
             </li>
-            <li>
-              <a href="/Panelpermisos" className="nav-link px-2">
-                Panel de permisos
-              </a>
-            </li>
+            {user?.rol?.nombre === "Admin" && (
+          <li>
+            <a href="/PanelPermisos" className="nav-link px-2">
+              Panel de permisos
+            </a>
+          </li>
+            )}
+            {user?.rol?.nombre === "Admin" && (
+              <li>
+                <a href="/register" className="nav-link px-2">
+                  Registro de empleados
+                </a>
+              </li>
+            )}
             <li>
               <a href="#" className="nav-link px-2">
                 Reconocimiento de ambiente
@@ -63,11 +72,6 @@ export const Navbar = () => {
             <a href="/Login" className="LoginBtn">
               <button type="button" className="btn btn-outline-primary me-2">
                 Inicio de Sesión
-              </button>
-            </a>
-            <a href="/Register" className="RegisterBtn">
-              <button type="button" className="btn btn-primary">
-                Registro
               </button>
             </a>
           </div>}

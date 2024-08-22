@@ -17,7 +17,7 @@ async def agregar_permiso_a_usuario(request: PermisoRequest, db: Session = Depen
     id_user = request.id_user
     return agregar_permiso_al_rol(id_user, id_permiso, db)
 
-@permiso_rutes.post('/role/removePermission')
+@permiso_rutes.patch('/role/removePermission')
 async def sacar_permiso_a_usuario(request: PermisoRequest, db: Session = Depends(get_db)):
     id_permiso = request.id_permiso
     id_user = request.id_user

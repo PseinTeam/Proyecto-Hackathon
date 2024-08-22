@@ -93,7 +93,7 @@ export const Login = () => {
               <option className="Options" value="Agropecuaria">
                 Agropecuaria
               </option>
-              <option className="Options" value="Admin">
+              <option className="Options" value="Administrador">
                 Administrador
               </option>
               <option className="Options" value="Area de seguridad">
