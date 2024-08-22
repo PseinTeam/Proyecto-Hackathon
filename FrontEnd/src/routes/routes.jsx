@@ -4,6 +4,7 @@ import { PseinTeam } from "../pages/home/PseinTeam.jsx";
 import { Login } from "../pages/Login.jsx";
 import { Register } from "../pages/Registroempleados.jsx";
 import { Changedata } from "../pages/Changedata.jsx";
+import { InspectionForm } from "../components/Inspections/Inspections.jsx";
 
 export const RoutesComponent = () => {
   return (
@@ -13,6 +14,7 @@ export const RoutesComponent = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/Changedata" element={<Changedata />} />
       <Route path="/Register" element={<Register />} />
+      <Route path="/InspectionForm" element={<InspectionForm />} />
     </Routes>
   );
 };
