@@ -3,6 +3,7 @@ from fastapi import FastAPI, responses
 from routes.user_routes import user_rutes
 from routes.alert_routes import alert_router
 from routes.auth_routes import auth_router
+from routes.permiso_routes import permiso_rutes
 from fastapi.middleware.cors import CORSMiddleware
 import init_db
 from services.roles_permisos_asignacion import Db_insert_RP
@@ -29,6 +30,7 @@ app.include_router(websocket_router)
 app.include_router(alert_router)
 app.include_router(user_rutes)
 app.include_router(auth_router)
+app.include_router(permiso_rutes)
 
 Db_insert_RP()
 

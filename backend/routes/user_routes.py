@@ -150,3 +150,9 @@ async def change_name_route(id: int, new_name: str, db: Session = Depends(get_db
 
 
 
+@user_rutes.get('/user/All')
+async def get_all_users_route(db: Session = Depends(get_db)):
+    users = get_all_users(db)
+    if not users:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No users found")
+    return users

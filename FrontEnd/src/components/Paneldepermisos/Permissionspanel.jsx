@@ -6,6 +6,7 @@ export const PanelPermisos = () => {
   const [permissions, setPermissions] = useState([]);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [showUserList, setShowUserList] = useState(true); // Estado para controlar la visibilidad de la lista de usuarios
 
   // Función para obtener usuarios
   const fetchUsers = async () => {
@@ -44,7 +45,6 @@ export const PanelPermisos = () => {
     }
   };
 
-  // Fetch initial data
   useEffect(() => {
     fetchPermissions();
     fetchUsers();
@@ -60,6 +60,7 @@ export const PanelPermisos = () => {
         const data = await response.json();
         if (data.Usuario) {
           setSelectedUser(data.Usuario);
+          setShowUserList(false); // Oculta la lista de usuarios cuando se selecciona uno
         } else {
           console.error("User not found");
         }
@@ -89,10 +90,10 @@ export const PanelPermisos = () => {
           body: JSON.stringify({ id_user: user.id, id_permiso: permission.id }),
         }
       );
-      console.log("Add permission response:", response); // Log de la respuesta completa
+      console.log("Add permission response:", response);
       if (response.ok) {
         const data = await response.json();
-        console.log("Add permission data:", data); // Log de los datos recibidos
+        console.log("Add permission data:", data);
         fetchUserById(user.id); // Actualiza los permisos del usuario
       } else {
         const error = await response.json();
@@ -116,10 +117,10 @@ export const PanelPermisos = () => {
           body: JSON.stringify({ id_user: user.id, id_permiso: permission.id }),
         }
       );
-      console.log("Remove permission response:", response); // Log de la respuesta completa
+      console.log("Remove permission response:", response);
       if (response.ok) {
         const data = await response.json();
-        console.log("Remove permission data:", data); // Log de los datos recibidos
+        console.log("Remove permission data:", data);
         fetchUserById(user.id); // Actualiza los permisos del usuario
       } else {
         const error = await response.json();
@@ -144,52 +145,61 @@ export const PanelPermisos = () => {
     }
   };
 
+  // Función para regresar a la lista de usuarios
+  const handleBackClick = () => {
+    setSelectedUser(null);
+    setShowUserList(true); // Muestra la lista de usuarios cuando se hace clic en "Atrás"
+  };
+
   return (
     <div>
       <Navbar />
-      {users.length === 0 ? (
-        <p>Cargando usuarios...</p>
-      ) : (
+      {showUserList ? (
         <UsuariosPermisos users={users} onUserClick={handleClick} />
-      )}
-
-      {selectedUser && (
+      ) : (
         <div>
-          <h2>Permisos de {selectedUser.full_name}</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Permiso</th>
-                <th>Estado</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-            <tbody>
-              {permissions.map((permission, index) => {
-                if (!selectedUser.rol) return null; // Asegúrate de que `selectedUser.rol` exista
-                const userHasPermission = selectedUser.rol.permisos.includes(
-                  permission.nombre_permiso
-                );
-                return (
-                  <tr key={index}>
-                    <td>{permission.nombre_permiso}</td>
-                    <td style={{ color: userHasPermission ? "green" : "red" }}>
-                      {userHasPermission ? "Permitido" : "No permitido"}
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={userHasPermission}
-                        onChange={() =>
-                          handleCheckboxChange(permission, selectedUser)
-                        }
-                      />
-                    </td>
+          <button onClick={handleBackClick}>Atrás</button>
+          {selectedUser && (
+            <div>
+              <h2>Permisos de {selectedUser.full_name}</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Permiso</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                </thead>
+                <tbody>
+                  {permissions.map((permission, index) => {
+                    if (!selectedUser.rol) return null;
+                    const userHasPermission = selectedUser.rol.permisos.includes(
+                      permission.nombre_permiso
+                    );
+                    return (
+                      <tr key={index}>
+                        <td>{permission.nombre_permiso}</td>
+                        <td
+                          style={{ color: userHasPermission ? "green" : "red" }}
+                        >
+                          {userHasPermission ? "Permitido" : "No permitido"}
+                        </td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            checked={userHasPermission}
+                            onChange={() =>
+                              handleCheckboxChange(permission, selectedUser)
+                            }
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       )}
     </div>

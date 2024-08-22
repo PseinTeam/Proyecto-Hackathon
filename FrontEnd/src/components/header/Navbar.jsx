@@ -1,8 +1,14 @@
-import React from "react";
+import {useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../../../public/img/logo.png";
+import { AuthContext } from "../../context/AuthProvider.jsx";
+import { CerrarSesion } from "../../components/CerrarSesion.jsx";
 
 export const Navbar = () => {
+
+  const { state } = useContext(AuthContext);
+
+  console.log(state.logged);
   return (
     <div>
       <div className="container">
@@ -52,6 +58,7 @@ export const Navbar = () => {
             </li>
           </ul>
 
+          {state.logged ? <CerrarSesion /> :           
           <div className="col-md-3 text-end">
             <a href="/Login" className="LoginBtn">
               <button type="button" className="btn btn-outline-primary me-2">
@@ -63,7 +70,7 @@ export const Navbar = () => {
                 Registro
               </button>
             </a>
-          </div>
+          </div>}
         </header>
       </div>
     </div>

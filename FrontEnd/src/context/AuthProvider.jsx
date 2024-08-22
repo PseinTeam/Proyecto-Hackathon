@@ -22,8 +22,6 @@ export const AuthProvider = ({ children }) => {
                 dispatch({
                     type: types.LOGOUT
                 });
-                setUserId('');
-                setUser({});
                 return;
             }
 
@@ -54,9 +52,8 @@ export const AuthProvider = ({ children }) => {
                 }
 
                 const data = await response.json();
-                if (data && data.user){
-                    setUserId(data.user.id);
-                    setUser(data.user);
+                if (data && data.Usuario){
+                    setUserId(data.Usuario.id);
                 }
             }
             catch(error){

@@ -46,6 +46,7 @@ export const Login = () => {
     
       if (response.status == 200){
         const data = await response.json();
+        console.log('Data del loguin',data);
         login(data);
         localStorage.setItem('token', data);
         setTimeout(()=>{
