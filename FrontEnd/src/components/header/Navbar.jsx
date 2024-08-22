@@ -102,17 +102,17 @@ export const Navbar = () => {
               </a>
               <ul className="dropdown-menu" aria-labelledby="panelDropdown">
                 <li>
-                  <a href="#" className="dropdown-item">
+                  <a href="/Securitymeasurements" className="dropdown-item">
                     Medidas de seguridad
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="dropdown-item">
+                  <a href="/Constructionslaws" className="dropdown-item">
                     Leyes de construcción
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="dropdown-item">
+                  <a href="/Awareness" className="dropdown-item">
                     Concientización
                   </a>
                 </li>
