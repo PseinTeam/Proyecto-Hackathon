@@ -6,6 +6,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-content: center;
 }
 
 section {
@@ -20,6 +21,7 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   padding-right: 100px;
   padding-left: 100px;
 }

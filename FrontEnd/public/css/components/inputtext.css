@@ -6,12 +6,11 @@
   background: #4671ea;
 }
 .inputwrapper {
-  margin-top: 11%;
+  margin-top: 12.5%;
   margin-left: 80px;
   width: 470px;
-  background: #f0f8ff;
   border-radius: 5px;
-  padding: 25px 25px 30px;
+  padding: 0px 25px 25px;
 }
 
 .buttonwrapper {
@@ -19,21 +18,21 @@
 }
 
 .inputwrapper h2 {
-  color: #4671ea;
-  font-size: 28px;
+  color: #000000;
+  font-size: 30px;
   text-align: center;
 }
 
 .buttonwrapper h2 {
-  color: #4671ea;
-  font-size: 28px;
+  color: #000000;
+  font-size: 30px;
   text-align: center;
 }
 
 .inputwrapper textarea {
   width: 100%;
   resize: none;
-  height: 59px;
+  height: 90px;
   outline: none;
   padding: 15px;
   font-size: 16px;

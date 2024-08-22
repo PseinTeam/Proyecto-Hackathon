@@ -1,6 +1,5 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../../public/css/components/Login.css";
 
 export const Navbar = () => {
   return (
@@ -53,11 +52,11 @@ export const Navbar = () => {
           </ul>
 
           <div className="col-md-3 text-end">
-            <button type="button" className="btn btn-outline-primary me-2">
-              <a href="/Login" className="LoginBtn">
+            <a href="/Login" className="LoginBtn">
+              <button type="button" className="btn btn-outline-primary me-2">
                 Login
-              </a>
-            </button>
+              </button>
+            </a>
             <button type="button" className="btn btn-primary">
               Sign-up
             </button>
