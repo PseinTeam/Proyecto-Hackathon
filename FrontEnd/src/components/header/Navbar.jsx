@@ -19,7 +19,7 @@ export const Navbar = () => {
                 height="37"
                 role="img"
                 aria-label="Logo"
-                alt=""
+                alt="Logo"
               />
             </a>
           </div>
@@ -30,24 +30,78 @@ export const Navbar = () => {
                 Inicio
               </a>
             </li>
-            <li>
-              <a href="/InspectionForm" className="nav-link px-2">
-                Inspecciones
+
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle px-2"
+                href="#"
+                id="panelDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Paneles
               </a>
+              <ul className="dropdown-menu" aria-labelledby="panelDropdown">
+                <li>
+                  <a className="dropdown-item" href="/Panelpermisos">
+                    Panel de permisos
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/PanelEmergencias">
+                    Panel de emergencias
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/Employeepanel">
+                    Panel de empleados
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/Inspectionspanel">
+                    Panel de inspecciones
+                  </a>
+                </li>
+              </ul>
             </li>
-            <li>
-              <a href="/Panelpermisos" className="nav-link px-2">
-                Panel de permisos
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle px-2"
+                href="#"
+                id="panelDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Herramientas
               </a>
+              <ul className="dropdown-menu" aria-labelledby="panelDropdown">
+                <li>
+                  <a href="/Ambientrecognicion" className="dropdown-item">
+                    Reconocimiento de ambiente
+                  </a>
+                </li>
+                <li>
+                  <a href="/InspectionForm" className="dropdown-item">
+                    Inspecciones
+                  </a>
+                </li>
+              </ul>
             </li>
+
             <li>
-              <a href="#" className="nav-link px-2">
-                Reconocimiento de ambiente
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link px-2">
+              <a
+                href="https://jorgito-76bcf3.zapier.app"
+                target="_blank"
+                className="nav-link px-2"
+              >
                 Asistente virtual
+              </a>
+            </li>
+            <li>
+              <a href="#" className="nav-link px-2">
+                Perfil
               </a>
             </li>
           </ul>
