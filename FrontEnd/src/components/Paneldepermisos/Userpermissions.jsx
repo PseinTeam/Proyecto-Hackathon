@@ -15,6 +15,7 @@ export const UsuariosPermisos = ({ users, onUserClick }) => {
           <tr>
             <th>Nombre</th>
             <th>Correo</th>
+            <th>Puesto de trabajo</th>
             <th>Rol</th>
           </tr>
         </thead>
@@ -23,6 +24,7 @@ export const UsuariosPermisos = ({ users, onUserClick }) => {
             <tr key={index} onClick={() => onUserClick(user)}>
               <td>{user.full_name}</td>
               <td>{user.email}</td>
+              <td>{user.puesto_trabajo}</td>
               <td>{user.rol.nombre}</td>
             </tr>
           ))}

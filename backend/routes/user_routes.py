@@ -47,7 +47,9 @@ async def create_users(request: CreateUsersRequest, db: Session = Depends(get_db
 async def login_user(login_request: LoginRequest, db: Session = Depends(get_db)):
     full_name = login_request.full_name
     password = login_request.password
-    user = authenticate_user(full_name, password, db)
+    puesto_trabajo = login_request.puesto_trabajo
+
+    user = authenticate_user(full_name, password,puesto_trabajo, db)
     if not user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid credentials")
     
@@ -148,3 +150,9 @@ async def change_name_route(id: int, new_name: str, db: Session = Depends(get_db
 
 
 
+@user_rutes.get('/user/All')
+async def get_all_users_route(db: Session = Depends(get_db)):
+    users = get_all_users(db)
+    if not users:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No users found")
+    return users
