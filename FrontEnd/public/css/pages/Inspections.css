@@ -1,0 +1,110 @@
+.form-container {
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1200px;
+  font-family: Arial, sans-serif;
+}
+
+.form-title {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.inspection-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-input,
+.file-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-header {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+  background-color: #f2f2f2;
+}
+
+.table-data {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.table-input,
+.table-select {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.evidence-image {
+  width: 100px;
+  height: auto;
+}
+
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.form-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.indicador {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 5px;
+}

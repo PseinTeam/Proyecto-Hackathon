@@ -1,0 +1,87 @@
+.button {
+  margin-top: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  padding: 10px 15px;
+  gap: 15px;
+  margin-left: 110px;
+  background-color: #007acc;
+  outline: 3px #007acc solid;
+  outline-offset: -3px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.button .text {
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+  transition: 400ms;
+  margin: 0;
+}
+
+.button svg path {
+  transition: 400ms;
+}
+
+.button:hover {
+  background-color: transparent;
+}
+
+.button:hover .text {
+  color: #007acc;
+}
+
+.button:hover svg path {
+  fill: #007acc;
+}
+
+.buttonEmergencia .text {
+  margin: 0;
+}
+
+.buttonEmergencia {
+  margin-top: 7%;
+  margin-bottom: 40%;
+  height: 150px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  gap: 15px;
+  background-color: #ff0000;
+  outline: 3px #ff0000 solid;
+  outline-offset: -3px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.buttonEmergencia .text {
+  color: white;
+  font-weight: 700;
+  font-size: 2em;
+  transition: 400ms;
+}
+
+.buttonEmergencia svg path {
+  transition: 400ms;
+}
+
+.buttonEmergencia:hover {
+  background-color: transparent;
+}
+
+.buttonEmergencia:hover .text {
+  color: #cc0000;
+}
+
+.buttonEmergencia:hover svg path {
+  fill: #ff0000;
+}
