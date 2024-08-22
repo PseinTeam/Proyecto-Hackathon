@@ -7,6 +7,13 @@ import { Changedata } from "../pages/Changedata.jsx";
 import { InspectionForm } from "../components/Inspections/Inspections.jsx";
 import { Panel } from "../components/Panel/PanelEmergencias.jsx";
 import { PanelPermisos } from "../components/Paneldepermisos/Permissionspanel.jsx";
+import { Ambientrecognicion } from "../pages/Ambientrecognicion.jsx";
+import { Employeepanel } from "../components/Panelempleados/Employeepanel.jsx";
+import { Inspectionspanel } from "../components/Panelinspecciones/Inspectionspanel.jsx";
+import { Perfil } from "../pages/Perfil.jsx";
+import { Securitymeasurements } from "../pages/Securitymeasurements.jsx";
+import { Constructionslaws } from "../pages/Constructionslaws.jsx";
+import { Awareness } from "../pages/Awareness.jsx";
 
 export const RoutesComponent = () => {
   return (
@@ -19,6 +26,13 @@ export const RoutesComponent = () => {
       <Route path="/InspectionForm" element={<InspectionForm />} />
       <Route path="/PanelEmergencias" element={<Panel />} />
       <Route path="/PanelPermisos" element={<PanelPermisos />} />
+      <Route path="/Ambientrecognicion" element={<Ambientrecognicion />} />
+      <Route path="/Employeepanel" element={<Employeepanel />} />
+      <Route path="/Inspectionspanel" element={<Inspectionspanel />} />
+      <Route path="/Perfil" element={<Perfil />} />
+      <Route path="/Securitymeasurements" element={<Securitymeasurements />} />
+      <Route path="/Constructionslaws" element={<Constructionslaws />} />
+      <Route path="/Awareness" element={<Awareness />} />
     </Routes>
   );
 };

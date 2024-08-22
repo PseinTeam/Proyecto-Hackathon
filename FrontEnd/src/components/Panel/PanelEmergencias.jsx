@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useWebSocket } from "../../context/WebSocketContext"
+import { useWebSocket } from "../../context/WebSocketContext";
 import { useNotification } from "../../context/NotificationContext";
 import { Navbar } from "../header/Navbar";
 import { EmergencyModal } from "../EmergencyModal/EmergencyModal";
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import "bootstrap/dist/css/bootstrap.min.css";
+import Footer from "../Footer/Footer";
 
 export const Panel = () => {
   const ws = useWebSocket();
@@ -15,7 +16,9 @@ export const Panel = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await fetch("http://localhost:8000/Usuarios/alert/messages");
+        const response = await fetch(
+          "http://localhost:8000/Usuarios/alert/messages"
+        );
         if (!response.ok) throw new Error("Error al obtener mensajes");
         const data = await response.json();
         setMessages(data);
@@ -89,27 +92,47 @@ export const Panel = () => {
         <button className="btn btn-danger" onClick={handleOpen}>
           Enviar emergencia
         </button>
-        <div className={`modal ${open ? "show" : ""}`} style={{ display: open ? "block" : "none" }} tabIndex="-1" role="dialog">
+        <div
+          className={`modal ${open ? "show" : ""}`}
+          style={{ display: open ? "block" : "none" }}
+          tabIndex="-1"
+          role="dialog"
+        >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="emergency-modal-title">Confirmación de Emergencia</h5>
-                <button type="button" className="close" onClick={handleClose} aria-label="Close">
+                <h5 className="modal-title" id="emergency-modal-title">
+                  Confirmación de Emergencia
+                </h5>
+                <button
+                  type="button"
+                  className="close"
+                  onClick={handleClose}
+                  aria-label="Close"
+                >
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div className="modal-body">
-                <p>¿Está seguro de que desea enviar una alerta de emergencia a todos los clientes?</p>
+                <p>
+                  ¿Está seguro de que desea enviar una alerta de emergencia a
+                  todos los clientes?
+                </p>
               </div>
               <div className="modal-footer">
-                <button className="btn btn-danger" onClick={sendEmergency}>Enviar</button>
-                <button className="btn btn-secondary" onClick={handleClose}>Cancelar</button>
+                <button className="btn btn-danger" onClick={sendEmergency}>
+                  Enviar
+                </button>
+                <button className="btn btn-secondary" onClick={handleClose}>
+                  Cancelar
+                </button>
               </div>
             </div>
           </div>
         </div>
         <EmergencyModal />
       </div>
+      <Footer />
     </div>
   );
 };
