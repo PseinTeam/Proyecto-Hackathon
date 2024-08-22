@@ -148,7 +148,7 @@ def crear_super_admin(db: Session):
             "full_name": 'aaaaaaaaa',
             "email": 'asdasdasda@gmail.com',
             "password": 'saaaas',
-            "puesto_trabajo": 'saaaaas',
+            "puesto_trabajo": 'Administrador',
             'id_role': 1
         }
         create_user(UserCreate(**user_data), db)

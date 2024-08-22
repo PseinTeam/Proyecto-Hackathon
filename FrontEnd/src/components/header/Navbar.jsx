@@ -1,12 +1,11 @@
-import {useContext, useState } from "react";
+import { useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../../../public/img/logo.png";
 import { AuthContext } from "../../context/AuthProvider.jsx";
 import { CerrarSesion } from "../../components/CerrarSesion.jsx";
 
 export const Navbar = () => {
-
-  const { state } = useContext(AuthContext);
+  const { state, user } = useContext(AuthContext);
 
   console.log(state.logged);
   return (
@@ -95,36 +94,20 @@ export const Navbar = () => {
                 </li>
               </ul>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle px-2"
-                href="#"
-                id="panelDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Capacitaciones
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="panelDropdown">
-                <li>
-                  <a href="/Securitymeasurements" className="dropdown-item">
-                    Medidas de seguridad
-                  </a>
-                </li>
-                <li>
-                  <a href="/Constructionslaws" className="dropdown-item">
-                    Leyes de construcción
-                  </a>
-                </li>
-                <li>
-                  <a href="/Awareness" className="dropdown-item">
-                    Concientización
-                  </a>
-                </li>
-              </ul>
-            </li>
-
+            {user?.rol?.nombre === "Admin" && (
+              <li>
+                <a href="/PanelPermisos" className="nav-link px-2">
+                  Panel de permisos
+                </a>
+              </li>
+            )}
+            {user?.rol?.nombre === "Admin" && (
+              <li>
+                <a href="/register" className="nav-link px-2">
+                  Registro de empleados
+                </a>
+              </li>
+            )}
             <li>
               <a
                 href="https://jorgito-76bcf3.zapier.app"
@@ -141,19 +124,17 @@ export const Navbar = () => {
             </li>
           </ul>
 
-          {state.logged ? <CerrarSesion /> :           
-          <div className="col-md-3 text-end">
-            <a href="/Login" className="LoginBtn">
-              <button type="button" className="btn btn-outline-primary me-2">
-                Inicio de Sesión
-              </button>
-            </a>
-            <a href="/Register" className="RegisterBtn">
-              <button type="button" className="btn btn-primary">
-                Registro
-              </button>
-            </a>
-          </div>}
+          {state.logged ? (
+            <CerrarSesion />
+          ) : (
+            <div className="col-md-3 text-end">
+              <a href="/Login" className="LoginBtn">
+                <button type="button" className="btn btn-outline-primary me-2">
+                  Inicio de Sesión
+                </button>
+              </a>
+            </div>
+          )}
         </header>
       </div>
     </div>
