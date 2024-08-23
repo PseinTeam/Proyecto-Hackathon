@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../../../public/img/logo.png";
 import { AuthContext } from "../../context/AuthProvider.jsx";
