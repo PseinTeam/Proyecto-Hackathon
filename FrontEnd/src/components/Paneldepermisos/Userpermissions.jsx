@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { EmergencyModal } from "../EmergencyModal/EmergencyModal";
 
 export const UsuariosPermisos = ({ users, onUserClick }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -99,6 +100,7 @@ export const UsuariosPermisos = ({ users, onUserClick }) => {
           )}
         </tbody>
       </table>
+      <EmergencyModal/>
     </div>
   );
 };

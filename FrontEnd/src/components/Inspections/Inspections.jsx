@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../../../public/css/pages/Inspections.css";
 import { Navbar } from "../header/Navbar";
 import Footer from "../Footer/Footer";
+import { EmergencyModal } from "../EmergencyModal/EmergencyModal";
 
 export const InspectionForm = () => {
   const [employerData, setEmployerData] = useState({
@@ -555,6 +556,7 @@ export const InspectionForm = () => {
         </form>
       </div>
       <Footer />
+      <EmergencyModal />
     </div>
   );
 };

@@ -10,6 +10,7 @@ import {
   Alert,
   Form,
 } from "react-bootstrap";
+import { EmergencyModal } from "../EmergencyModal/EmergencyModal.jsx";
 
 export const PanelPermisos = () => {
   const [permissions, setPermissions] = useState([]);
@@ -209,6 +210,7 @@ export const PanelPermisos = () => {
         )}
       </Container>
       <Footer />
+      <EmergencyModal />
     </div>
   );
 };
