@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Navbar } from "../../components/header/Navbar";
 import { Footer } from "../../components/Footer/Footer";
 import DenunciasyEmergencias from "../../components/DenunciasyEmergencias/DyE";
@@ -31,7 +31,7 @@ export const PseinTeam = () => {
       </header>
       <div className="content">
         <TaskManager />
-        {user?.rol?.nombre === 'segurity' && <Dashboard />}
+        {user?.rol?.nombre === "segurity" && <Dashboard />}
         <EmergencyModal />
         <CounterWA />
       </div>

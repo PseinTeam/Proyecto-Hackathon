@@ -76,7 +76,7 @@
 
 .buttonEmergencia:hover {
   background-color: transparent;
-  outline: 3px #ff0000 solid;
+  outline: 3px #ff0000 solid; /* Asegúrate de que el borde se mantenga visible */
 }
 
 .buttonEmergencia:hover .text {
@@ -85,4 +85,9 @@
 
 .buttonEmergencia:hover svg path {
   fill: #ff0000;
+}
+
+/* Agregar estilo para el estado de enfoque (focus) */
+.buttonEmergencia:focus {
+  outline: 3px #ff0000 solid; /* Asegúrate de que el borde se mantenga visible */
 }
