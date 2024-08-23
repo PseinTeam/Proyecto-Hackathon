@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Navbar } from "../../components/header/Navbar";
 import { Footer } from "../../components/Footer/Footer";
 import DenunciasyEmergencias from "../../components/DenunciasyEmergencias/DyE";
@@ -8,9 +8,12 @@ import { TaskManager } from "../../components/Gestiondetareas/Taskmanager";
 import { EmergencyModal } from "../../components/EmergencyModal/EmergencyModal";
 import Loadingscreen from "../../components/Loaders/Loadingscreen.jsx"; // Importar el componente Loadingscreen
 import { useLoading } from "../../context/LoadingContext.jsx"; // Importar el contexto LoadingContext
+import { AuthContext } from "../../context/AuthProvider.jsx";
 
 export const PseinTeam = () => {
   const { setIsLoading } = useLoading(); // Obtener setIsLoading desde el contexto
+
+  const { user } = useContext(AuthContext);
 
   // Simular una carga inicial
   React.useEffect(() => {
@@ -30,6 +33,7 @@ export const PseinTeam = () => {
         <TaskManager />
         <Dashboard />
         <EmergencyModal />
+        {user?.rol?.nombre === 'segurity' && <Dashboard />}
         <DenunciasyEmergencias />
         <CounterWA />
       </div>

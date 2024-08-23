@@ -1,10 +1,11 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import Calendar from "react-calendar";
 import { Container, Button, Form, Table, Alert } from "react-bootstrap";
 import { format } from "date-fns";
 import { es } from "date-fns/locale"; // Importar locale directamente desde 'date-fns/locale'
 import "react-calendar/dist/Calendar.css";
 import "../../../public/css/components/TaskManager.css"; // Importar el archivo CSS
+import { AuthContext } from "../../context/AuthProvider";
 
 const urgencyColors = {
   Alta: "#FF4C4C", // Rojo
@@ -21,6 +22,8 @@ export const TaskManager = () => {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskColor, setTaskColor] = useState("Ninguna");
   const [selectedDateTasks, setSelectedDateTasks] = useState([]);
+
+  const { user } = useContext(AuthContext);
 
   const handleDateChange = useCallback(
     (newDate) => {
@@ -97,33 +100,35 @@ export const TaskManager = () => {
           />
         </div>
         <div className="flex-fill" style={{ marginRight: "5.5%" }}>
-          <Form>
-            <Form.Group controlId="taskTitle">
-              <Form.Label>Título de la Tarea</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Ingrese el título de la tarea"
-                value={taskTitle}
-                onChange={handleTaskTitleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="taskColor" className="mt-3">
-              <Form.Label>Urgencia de la Tarea</Form.Label>
-              <Form.Control
-                as="select"
-                value={taskColor}
-                onChange={handleTaskColorChange}
-              >
-                <option value="Ninguna">Sin urgencia</option>
-                <option value="Baja">Baja urgencia</option>
-                <option value="Media">Media urgencia</option>
-                <option value="Alta">Alta urgencia</option>
-              </Form.Control>
-            </Form.Group>
-            <Button variant="primary" className="mt-3" onClick={handleAddTask}>
-              Agregar Tarea
-            </Button>
-          </Form>
+            {user?.rol?.nombre === "segurity" && (
+                        <Form>
+                        <Form.Group controlId="taskTitle">
+                          <Form.Label>Título de la Tarea</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Ingrese el título de la tarea"
+                            value={taskTitle}
+                            onChange={handleTaskTitleChange}
+                          />
+                        </Form.Group>
+                        <Form.Group controlId="taskColor" className="mt-3">
+                          <Form.Label>Urgencia de la Tarea</Form.Label>
+                          <Form.Control
+                            as="select"
+                            value={taskColor}
+                            onChange={handleTaskColorChange}
+                          >
+                            <option value="Ninguna">Sin urgencia</option>
+                            <option value="Baja">Baja urgencia</option>
+                            <option value="Media">Media urgencia</option>
+                            <option value="Alta">Alta urgencia</option>
+                          </Form.Control>
+                        </Form.Group>
+                        <Button variant="primary" className="mt-3" onClick={handleAddTask}>
+                          Agregar Tarea
+                        </Button>
+                      </Form>
+            )}
           <div className="mt-4">
             <h3>Tareas del {formattedDate}</h3>
             {selectedDateTasks.length > 0 ? (
