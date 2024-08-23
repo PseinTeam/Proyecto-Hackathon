@@ -17,7 +17,7 @@ def authenticate_user(full_name: str, password: str,puesto_trabajo: str, db: Ses
 
 def create_user(user: UserCreate, db: Session):
     hashed_password = hash_password(user.password)
-    db_user = Users(full_name=user.full_name, email=user.email, puesto_trabajo=user.puesto_trabajo, password=hashed_password, id_role=user.id_role)
+    db_user = Users(full_name=user.full_name, email=user.email, puesto_trabajo=user.puesto_trabajo, password=hashed_password,telefono=user.telefono, id_role=user.id_role)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -48,6 +48,7 @@ def get_user_by_id(id: int, db: Session):
             "full_name": user.full_name,
             "puesto_trabajo": user.puesto_trabajo,
             "email": user.email,
+            telefono: user.telefono,
             "rol": {
                 "id": user.rol.id if user.rol else None,
                 "nombre": user.rol.nombre_rol if user.rol else None,
@@ -130,6 +131,7 @@ def get_all_users(db: Session):
                 "full_name": user.full_name,
                 "puesto_trabajo": user.puesto_trabajo,
                 "email": user.email,
+                "telefono": user.telefono,
                 "rol": {
                     "id": user.rol.id if user.rol else None,
                     "nombre": user.rol.nombre_rol if user.rol else None,

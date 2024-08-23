@@ -1,5 +1,5 @@
-import {useState, useContext} from "react";
-import {AuthContext} from "../context/AuthProvider.jsx";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthProvider.jsx";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../public/css/pages/Login.css";
@@ -9,67 +9,68 @@ export const Login = () => {
     full_name: "",
     password: "",
     puesto_trabajo: "",
-  })
+  });
 
-  const {login} = useContext(AuthContext);
-
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-
-
 
   const handleChange = (e) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
   };
-  console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (user.full_name === "" || user.password === "") {
       return;
     }
-    try{
-      const response = await fetch('http://127.0.0.1:8000/Usuarios/login',{
+    try {
+      const response = await fetch('http://127.0.0.1:8000/Usuarios/login', {
         method: 'POST',
-        headers:{
-          'Content-Type': 'application/json'
+        headers: {
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify(user),
       });
-    
-      if (!response.ok){
-        console.log('Error al iniciar sesion');
+
+      if (!response.ok) {
+        console.log('Error al iniciar sesión');
         return;
       }
-    
-      if (response.status == 200){
+
+      if (response.status === 200) {
         const data = await response.json();
-        console.log('Data del loguin',data);
+        console.log('Data del login', data);
         login(data);
-        localStorage.setItem('token', data);
-        setTimeout(()=>{
-          navigate('/');
-        })
+
+        if (user.full_name.includes("Usuario N")) {
+          // Redirigir al componente de cambio de datos
+          navigate('/Changedata');
+        } else {
+          // Guardar el token y redirigir al inicio
+          localStorage.setItem('token', data.token);
+          setTimeout(() => {
+            navigate('/');
+          });
+        }
       }
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
   };
 
-
-
   return (
     <div
-      className=" d-flex align-items-center py-4 bg-body-tertiary"
+      className="d-flex align-items-center py-4 bg-body-tertiary"
       style={{ height: "100vh" }}
     >
       <main
-        className=" LoginC form-signin w-100 m-auto"
+        className="LoginC form-signin w-100 m-auto"
         style={{ maxWidth: "330px" }}
       >
-        <form onSubmit={handleSubmit} onChange={handleChange} >
+        <form onSubmit={handleSubmit} onChange={handleChange}>
           <h1 className="h3 mb-3 fw-normal text-center">Bienvenido</h1>
 
           <div className="input-groupRE form-floating mb-1">
@@ -85,10 +86,10 @@ export const Login = () => {
                 Electricidad
               </option>
               <option className="Options" value="Construccion">
-                Construccion
+                Construcción
               </option>
               <option className="Options" value="Quimica">
-                Quimica
+                Química
               </option>
               <option className="Options" value="Agropecuaria">
                 Agropecuaria
@@ -100,7 +101,7 @@ export const Login = () => {
                 Admin
               </option>
               <option className="Options" value="Area de seguridad">
-                Area de seguridad
+                Área de seguridad
               </option>
             </select>
           </div>
