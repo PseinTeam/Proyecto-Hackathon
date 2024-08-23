@@ -31,7 +31,6 @@ export const PseinTeam = () => {
       </header>
       <div className="content">
         <TaskManager />
-        <Dashboard />
         <EmergencyModal />
         {user?.rol?.nombre === 'segurity' && <Dashboard />}
         <DenunciasyEmergencias />
