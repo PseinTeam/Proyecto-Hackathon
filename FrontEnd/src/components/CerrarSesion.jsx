@@ -18,7 +18,7 @@ export const CerrarSesion = () => {
                 Cerrar Sesión
             </button>
         </a>
-        {user?.rol?.nombre === "Admin" && (
+        {user?.rol?.nombre === "admin" && (
         <a href="/Register" className="RegisterBtn">
             <button type="button" className="btn btn-primary">
                 Registro

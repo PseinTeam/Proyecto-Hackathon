@@ -7,7 +7,8 @@ import { CerrarSesion } from "../../components/CerrarSesion.jsx";
 export const Navbar = () => {
   const { state, user } = useContext(AuthContext);
 
-  console.log(state.logged);
+console.log(user);
+
   return (
     <div>
       <div className="container">
@@ -36,65 +37,10 @@ export const Navbar = () => {
               </a>
             </li>
 
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle px-2"
-                href="#"
-                id="panelDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Paneles
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="panelDropdown">
-                <li>
-                  <a className="dropdown-item" href="/Panelpermisos">
-                    Panel de permisos
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/PanelEmergencias">
-                    Panel de emergencias
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/Employeepanel">
-                    Panel de empleados
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/Inspectionspanel">
-                    Panel de inspecciones
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle px-2"
-                href="#"
-                id="panelDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Herramientas
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="panelDropdown">
-                <li>
-                  <a href="/Ambientrecognicion" className="dropdown-item">
-                    Reconocimiento de ambiente
-                  </a>
-                </li>
-                <li>
-                  <a href="/InspectionForm" className="dropdown-item">
-                    Inspecciones
-                  </a>
-                </li>
-              </ul>
-            </li>
-            {user?.rol?.nombre === "Admin" && (
+            {/* Renderizado Condicional para Paneles */}
+            {(user?.rol?.nombre === "admin" ||
+              user?.rol?.nombre === "super_admin" ||
+              user?.rol?.nombre === "segurity") && (
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle px-2"
@@ -107,65 +53,75 @@ export const Navbar = () => {
                   Paneles
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="panelDropdown">
+                  {/* Panel de permisos y otros solo para admin y super_admin */}
+                  {(user?.rol?.nombre === "admin" ||
+                    user?.rol?.nombre === "super_admin") && (
+                    <>
+                      <li>
+                        <a className="dropdown-item" href="/Panelpermisos">
+                          Panel de permisos
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="/Employeepanel">
+                          Panel de empleados
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="/Inspectionspanel">
+                          Panel de inspecciones
+                        </a>
+                      </li>
+                    </>
+                  )}
+                  {/* Panel de emergencias solo para segurity */}
+                  {(user?.rol?.nombre === "admin" ||
+                    user?.rol?.nombre === "super_admin") && (
+                    <li>
+                      <a className="dropdown-item" href="/PanelEmergencias">
+                        Panel de emergencias
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              </li>
+            )}
+
+            {/* Renderizado Condicional para Herramientas */}
+            {user?.rol?.nombre === "segurity" && (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle px-2"
+                  href="#"
+                  id="panelDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Herramientas
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="panelDropdown">
                   <li>
-                    <a className="dropdown-item" href="/Panelpermisos">
-                      Panel de permisos
+                    <a
+                      href="/Ambientrecognicion"
+                      className="dropdown-item"
+                    >
+                      Reconocimiento de ambiente
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/PanelEmergencias">
-                      Panel de emergencias
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/Employeepanel">
-                      Panel de empleados
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/Inspectionspanel">
-                      Panel de inspecciones
+                    <a
+                      href="/InspectionForm"
+                      className="dropdown-item"
+                    >
+                      Inspecciones
                     </a>
                   </li>
                 </ul>
               </li>
             )}
-            {user?.rol?.nombre === "Admin" && (
-              <li>
-                <a href="/register" className="nav-link px-2">
-                  Registro de empleados
-                </a>
-              </li>
-            )}
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle px-2"
-                href="#"
-                id="panelDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Capacitaciones
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="panelDropdown">
-                <li>
-                  <a href="/Securitymeasurements" className="dropdown-item">
-                    Medidas de seguridad
-                  </a>
-                </li>
-                <li>
-                  <a href="/Constructionslaws" className="dropdown-item">
-                    Leyes de construcción
-                  </a>
-                </li>
-                <li>
-                  <a href="/Awareness" className="dropdown-item">
-                    Concientización
-                  </a>
-                </li>
-              </ul>
-            </li>
+
+            {/* Elementos accesibles por todos */}
             <li>
               <a
                 href="https://jorgito-76bcf3.zapier.app"
@@ -182,6 +138,7 @@ export const Navbar = () => {
             </li>
           </ul>
 
+          {/* Autenticación */}
           {state.logged ? (
             <CerrarSesion />
           ) : (

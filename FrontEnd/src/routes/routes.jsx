@@ -16,6 +16,8 @@ import { Constructionslaws } from "../pages/Constructionslaws.jsx";
 import { Awareness } from "../pages/Awareness.jsx";
 import { useLocation } from "react-router-dom";
 import { useLoading } from "../context/LoadingContext.jsx";
+import UniformeEvaluation from "../components/IaHerramientas/UniformeEvaluation.jsx";
+import AmbienteEvaluation from "../components/IaHerramientas/AmbienteEvaluation.jsx";
 
 export const RoutesComponent = () => {
   const location = useLocation();
@@ -47,6 +49,8 @@ export const RoutesComponent = () => {
       <Route path="/Securitymeasurements" element={<Securitymeasurements />} />
       <Route path="/Constructionslaws" element={<Constructionslaws />} />
       <Route path="/Awareness" element={<Awareness />} />
+      <Route path="/Uniformes" element={<UniformeEvaluation />} />
+      <Route path="/Ambiente" element={<AmbienteEvaluation />} />
     </Routes>
   );
 };
