@@ -7,7 +7,6 @@ import { CerrarSesion } from "../../components/CerrarSesion.jsx";
 export const Navbar = () => {
   const { state, user } = useContext(AuthContext);
 
-  console.log(user);
 
   return (
     <div>

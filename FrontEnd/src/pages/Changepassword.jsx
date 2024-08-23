@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../public/css/pages/Login.css";
 
-export const Changedata = () => {
+export const Changepassword = () => {
   const validatePasswords = (e) => {
     const password = document.getElementById("floatingPassword").value;
     const confirmPassword = document.getElementById(
@@ -35,7 +35,7 @@ export const Changedata = () => {
               type="password"
               className="form-control"
               id="floatingActualPassword"
-              placeholder="Password"
+              placeholder="Contraseña Actual"
             />
             <label htmlFor="floatingActualPassword">Contraseña Actual</label>
           </div>
@@ -45,7 +45,7 @@ export const Changedata = () => {
               type="password"
               className="form-control"
               id="floatingPassword"
-              placeholder="Password"
+              placeholder="Contraseña Nueva"
             />
             <label htmlFor="floatingPassword">Contraseña Nueva</label>
           </div>
@@ -74,9 +74,6 @@ export const Changedata = () => {
           <button className="btn btn-primary w-100 py-2" type="submit">
             Guardar
           </button>
-          <div className="text-center mt-2">
-            <a href="/">Volver al inicio</a>
-          </div>
         </form>
       </main>
     </div>

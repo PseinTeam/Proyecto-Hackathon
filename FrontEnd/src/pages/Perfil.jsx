@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar } from "../components/header/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "../components/Footer/Footer";
+import { EmergencyModal } from "../components/EmergencyModal/EmergencyModal";
 
 export const Perfil = () => {
   return (
@@ -27,12 +28,16 @@ export const Perfil = () => {
                 <p>Número de Teléfono: +54 9 11 1234-5678</p>
                 <p>Departamento: Seguridad</p>
                 <p>Cargo: Inspector</p>
-                <button className="btn btn-primary mt-2">
-                  Modificar Datos
-                </button>
-                <button className="btn btn-outline-secondary mt-2 ms-2">
-                  Cambiar Contraseña
-                </button>
+                <a href="/Changepersonaldata">
+                  <button className="btn btn-primary mt-2">
+                    Modificar Datos
+                  </button>
+                </a>
+                <a href="/Changepassword">
+                  <button className="btn btn-outline-secondary mt-2 ms-2">
+                    Cambiar Contraseña
+                  </button>
+                </a>
                 <button className="btn btn-outline-secondary mt-2 ms-2">
                   Cambiar Foto de Perfil
                 </button>
@@ -75,6 +80,7 @@ export const Perfil = () => {
         </div>
       </div>
       <Footer />
+      <EmergencyModal />
     </div>
   );
 };

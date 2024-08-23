@@ -9,6 +9,7 @@ export const Notallowed = () => {
       <h1 style={{ fontSize: "3rem", fontWeight: "bold", textAlign: "center" }}>
         Acceso no permitido
       </h1>
+      <a href="/">Return to Home</a>
       <Footer />
     </div>
   );

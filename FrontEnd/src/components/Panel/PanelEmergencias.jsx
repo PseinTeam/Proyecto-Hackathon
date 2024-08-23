@@ -17,7 +17,7 @@ export const Panel = () => {
     const fetchMessages = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/Usuarios/alert/messages"
+          "http://localhost:8000/alert/messages"
         );
         if (!response.ok) throw new Error("Error al obtener mensajes");
         const data = await response.json();

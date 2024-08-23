@@ -12,7 +12,7 @@ export const Changepersonaldata = () => {
         className=" LoginC form-signin w-100 m-auto"
         style={{ maxWidth: "330px" }}
       >
-        <form onSubmit={validatePasswords}>
+        <form>
           <h1 className="h3 mb-3 fw-normal text-center">Complete los campos</h1>
 
           <div className="form-floating mb-1">

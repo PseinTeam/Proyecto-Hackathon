@@ -7,6 +7,7 @@ import cascoImg from "../../public/img/casco.jpg"; // Imagen de ejemplo
 import guantesImg from "../../public/img/guantes.jpg"; // Imagen de ejemplo
 import gafasImg from "../../public/img/gafas.jpg"; // Imagen de ejemplo
 import chalecoImg from "../../public/img/chaleco.jpg"; // Imagen de ejemplo
+import { EmergencyModal } from "../components/EmergencyModal/EmergencyModal";
 
 export const Securitymeasurements = () => {
   return (
@@ -327,6 +328,7 @@ export const Securitymeasurements = () => {
       </Container>
 
       <Footer />
+      <EmergencyModal />
     </div>
   );
 };

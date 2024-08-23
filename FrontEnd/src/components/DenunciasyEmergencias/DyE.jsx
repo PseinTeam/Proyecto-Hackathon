@@ -1,16 +1,16 @@
-import React, {useContext, useState} from "react";
+import React, { useRef, useState, useContext } from "react";
 import "/public/css/components/inputtext.css";
-import "/public/css/components/button.css";
 import { AuthContext } from "../../context/AuthProvider";
-import { ca } from "date-fns/locale";
 
-export const DenunciasyEmergencias = () => {
+export const DenunciasyEmergencias = ({ onEmergency }) => {
+  const emergencyRef = useRef(null);
+  const denunciaRef = useRef(null);
   const [denunciaMessage, setDenunciaMessage] = useState("");
   const [notification, setNotification] = useState({ open: false, severity: '', message: '' });
 
   const { user } = useContext(AuthContext);
 
-  const handleDenuncia = async (message) => {
+  const handleSendMessage = async (message) => {
     try {
       const response = await fetch("http://localhost:8000/SendAlertMessage", {
         method: "POST",
@@ -32,20 +32,32 @@ export const DenunciasyEmergencias = () => {
         console.log("Error al enviar el mensaje:", data.detail);
         setNotification({ open: true, severity: 'error', message: 'Error al enviar mensaje' });
       }
-    }catch(error){
+    } catch (error) {
       console.log("Error al enviar el mensaje:", error);
       setNotification({ open: true, severity: 'error', message: 'Error al enviar mensaje' });
     }
   };
 
-  const handleDenunciaChange = (e) => {
-    setDenunciaMessage(e.target.value);
+  const handleEmergencyClick = async () => {
+    await handleSendMessage("¡Emergencia! Necesito asistencia.");
+  };
+
+  const handleDenunciaClick = async () => {
+    if (denunciaMessage.trim() !== "") {
+      await handleSendMessage(denunciaMessage);
+    } else {
+      setNotification({ open: true, severity: 'error', message: 'No puedes enviar una denuncia vacía' });
+    }
   };
 
   const handleCloseNotification = () => {
     setNotification({ ...notification, open: false });
   };
 
+  const handleClick = () => {
+    onEmergency();
+    handleEmergencyClick();
+  };
 
   return (
     <div className="SECCION">
@@ -55,8 +67,8 @@ export const DenunciasyEmergencias = () => {
           <div className="DivBotones">
             {/* BOTON DE EMERGENCIA */}
             <div className="buttonwrapper">
-              <h2>Boton de Emergencias</h2>
-              <button className="buttonEmergencia">
+              <h2>Botón de Emergencias</h2>
+              <button className="buttonEmergencia" onClick={handleClick} ref={emergencyRef}>
                 <p className="text">¡EMERGENCIA!</p>
               </button>
             </div>
@@ -66,17 +78,27 @@ export const DenunciasyEmergencias = () => {
           <div className="inputwrapper">
             <h2>Realice su Denuncia de seguridad</h2>
             <textarea
+              ref={denunciaRef}
               spellCheck="false"
-              placeholder="Type something here..."
+              placeholder="Escriba algo aquí..."
+              value={denunciaMessage}
+              onChange={(e) => setDenunciaMessage(e.target.value)}
               required
             ></textarea>
             {/* BOTON DE DENUNCIA */}
-            <button className="button">
+            <button className="button" onClick={handleDenunciaClick}>
               <p className="text">Denuncia</p>
             </button>
           </div>
         </div>
       </section>
+
+      {notification.open && (
+        <div className={`notification ${notification.severity}`}>
+          <p className="notification-message">{notification.message}</p>
+          <button className="notification-close" onClick={handleCloseNotification}>X</button>
+        </div>
+      )}
     </div>
   );
 };
