@@ -125,6 +125,14 @@ export const Navbar = () => {
                       Inspecciones
                     </a>
                   </li>
+                  <li>
+                    <a
+                      href="/ChecklistConstruccion"
+                      className="dropdown-item"
+                    >
+                      Lista de control
+                    </a>
+                  </li>
                 </ul>
               </li>
             )}
@@ -137,6 +145,15 @@ export const Navbar = () => {
                 className="nav-link px-2"
               >
                 Asistente virtual
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://archivos.formosa.gob.ar/media/uploads/guia_tramites/normas/norma_1490192310.pdf"
+                target="_blank"
+                className="nav-link px-2"
+              >
+                Leyes de seguridad
               </a>
             </li>
             <li>

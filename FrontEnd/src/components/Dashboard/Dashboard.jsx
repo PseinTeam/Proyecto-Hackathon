@@ -11,36 +11,87 @@ import {
   YAxis,
   CartesianGrid,
   ZAxis,
+  LineChart,
+  Line,
 } from "recharts";
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import { blue, green, red, yellow } from "@mui/material/colors";
 
-// Datos de ejemplo para los gráficos
-const pieData1 = [
-  { name: "Horas Trabajadas", value: 400 },
-  { name: "Horas No Trabajadas", value: 300 },
-  { name: "Horas Extras", value: 300 },
-];
+// Datos aleatorios para 1000 usuarios
+const generateRandomData = (numUsers) => {
+  const accidentsTypes = ["Leves", "Graves", "Fatales"];
+  const hoursTypes = [4, 2, 9];
 
-const pieData2 = [
-  { name: "Accidentes Leves", value: 150 },
-  { name: "Accidentes Graves", value: 50 },
-  { name: "Accidentes Fatales", value: 10 },
-];
+  const data = [];
+  for (let i = 0; i < numUsers; i++) {
+    data.push({
+      horasTrabajadas: hoursTypes[Math.floor(Math.random() * hoursTypes.length)],
+      accidentes: accidentsTypes[Math.floor(Math.random() * accidentsTypes.length)],
+      asistencia: Math.random() > 0.5 ? "Asistencia" : "Inasistencia",
+    });
+  }
+  return data;
+};
 
-const pieData3 = [
-  { name: "Inasistencia", value: 150 },
-  { name: "Asistencia", value: 50 },
-];
+const userData = generateRandomData(1000);
 
-const scatterData = [
-  { name: "Enero", horasTrabajadas: 40, accidentes: 3 },
-  { name: "Febrero", horasTrabajadas: 35, accidentes: 2 },
-  { name: "Marzo", horasTrabajadas: 50, accidentes: 5 },
-  { name: "Abril", horasTrabajadas: 45, accidentes: 4 },
-  // Agrega más datos según sea necesario
-];
+// Procesar datos para los gráficos
+const asistenciaData = userData.reduce((acc, item) => {
+  const asistenciaType = item.asistencia;
+  if (!acc[asistenciaType]) {
+    acc[asistenciaType] = 0;
+  }
+  acc[asistenciaType]++;
+  return acc;
+}, {});
+
+const accidentesData = userData.reduce((acc, item) => {
+  const accidentesType = item.accidentes;
+  if (!acc[accidentesType]) {
+    acc[accidentesType] = 0;
+  }
+  acc[accidentesType]++;
+  return acc;
+}, {});
+
+const horasTrabajadasData = userData.reduce((acc, item) => {
+  const horas = item.horasTrabajadas;
+  if (!acc[horas]) {
+    acc[horas] = 0;
+  }
+  acc[horas]++;
+  return acc;
+}, {});
+
+const pieAsistenciaData = Object.keys(asistenciaData).map((key) => ({
+  name: key,
+  value: asistenciaData[key],
+}));
+
+const pieAccidentesData = Object.keys(accidentesData).map((key) => ({
+  name: `Accidentes ${key}`,
+  value: accidentesData[key],
+}));
+
+const pieHorasTrabajadasData = Object.keys(horasTrabajadasData).map((key) => ({
+  name: `Horas ${key}`,
+  value: horasTrabajadasData[key],
+}));
+
 const COLORS = [blue[500], green[500], red[500], yellow[500]];
+
+// Datos para el gráfico de dispersión con relación entre horas trabajadas y accidentes
+const scatterData = [
+  { horasTrabajadas: 2, accidentes: 5 },
+  { horasTrabajadas: 4, accidentes: 15 },
+  { horasTrabajadas: 9, accidentes: 30 },
+  { horasTrabajadas: 2, accidentes: 6 },
+  { horasTrabajadas: 4, accidentes: 17 },
+  { horasTrabajadas: 9, accidentes: 35 },
+  { horasTrabajadas: 2, accidentes: 4 },
+  { horasTrabajadas: 4, accidentes: 14 },
+  { horasTrabajadas: 9, accidentes: 33 },
+];
 
 const Dashboard = () => {
   return (
@@ -50,17 +101,17 @@ const Dashboard = () => {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper elevation={3} style={{ padding: "20px" }}>
-            <Typography variant="h6">Distribución de Horas</Typography>
-            <PieChart width={400} height={300}>
+          <Paper elevation={3} style={{ padding: "16px" }}>
+            <Typography variant="h6">Distribución de Asistencia</Typography>
+            <PieChart width={300} height={250}>
               <Pie
-                data={pieData1}
+                data={pieAsistenciaData}
                 dataKey="value"
-                outerRadius={120}
+                outerRadius={100}
                 fill="#8884d8"
                 label
               >
-                {pieData1.map((entry, index) => (
+                {pieAsistenciaData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
@@ -73,17 +124,17 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper elevation={3} style={{ padding: "20px" }}>
+          <Paper elevation={3} style={{ padding: "16px" }}>
             <Typography variant="h6">Distribución de Accidentes</Typography>
-            <PieChart width={400} height={300}>
+            <PieChart width={300} height={250}>
               <Pie
-                data={pieData2}
+                data={pieAccidentesData}
                 dataKey="value"
-                outerRadius={120}
+                outerRadius={100}
                 fill="#82ca9d"
                 label
               >
-                {pieData2.map((entry, index) => (
+                {pieAccidentesData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
@@ -96,17 +147,17 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper elevation={3} style={{ padding: "20px" }}>
-            <Typography variant="h6">Distribución de Accidentes</Typography>
-            <PieChart width={400} height={300}>
+          <Paper elevation={3} style={{ padding: "16px" }}>
+            <Typography variant="h6">Distribución de Horas Trabajadas</Typography>
+            <PieChart width={300} height={250}>
               <Pie
-                data={pieData3}
+                data={pieHorasTrabajadasData}
                 dataKey="value"
-                outerRadius={120}
-                fill="#82ca9d"
+                outerRadius={100}
+                fill="#ffc658"
                 label
               >
-                {pieData3.map((entry, index) => (
+                {pieHorasTrabajadasData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
@@ -124,9 +175,9 @@ const Dashboard = () => {
               Comparación de Horas Trabajadas y Accidentes
             </Typography>
             <ScatterChart
-              width={800}
+              width={700}
               height={400}
-              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+              margin={{ top: 20, right: 30, bottom: 20, left: 20 }}
             >
               <CartesianGrid />
               <XAxis
@@ -138,6 +189,13 @@ const Dashboard = () => {
               <ZAxis type="number" dataKey="horasTrabajadas" />
               <Tooltip />
               <Scatter name="Datos" data={scatterData} fill={red[500]} />
+              <Line
+                type="linear"
+                dataKey="horasTrabajadas"
+                stroke="#8884d8"
+                dot={false}
+                strokeWidth={2}
+              />
             </ScatterChart>
           </Paper>
         </Grid>

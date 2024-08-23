@@ -21,6 +21,7 @@ import AmbienteEvaluation from "../components/IaHerramientas/AmbienteEvaluation.
 import { Changepersonaldata } from "../pages/Changepersonaldata.jsx";
 import { Changepassword } from "../pages/Changepassword.jsx";
 import { Notallowed } from "../components/Accesonopermitido/Notallowed.jsx";
+import { ChecklistForm } from "../components/Inspections/inspeccionChecklist.jsx";
 
 export const RoutesComponent = () => {
   const location = useLocation();
@@ -57,6 +58,7 @@ export const RoutesComponent = () => {
       <Route path="/Changepersonaldata" element={<Changepersonaldata />} />
       <Route path="/Changepassword" element={<Changepassword />} />
       <Route path="/Notallowed" element={<Notallowed />} />
+      <Route path="/ChecklistConstruccion" element={<ChecklistForm />} />
     </Routes>
   );
 };
