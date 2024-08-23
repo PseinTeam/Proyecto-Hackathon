@@ -31,8 +31,8 @@ export const PseinTeam = () => {
       </header>
       <div className="content">
         <TaskManager />
+        {user?.rol?.nombre === "segurity" && <Dashboard />}
         <EmergencyModal />
-        <DenunciasyEmergencias />
         <CounterWA />
       </div>
       <footer>
