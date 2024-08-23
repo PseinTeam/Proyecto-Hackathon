@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Navbar } from '../header/Navbar';
+import { Footer } from '../Footer/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const UniformeEvaluation = () => {
   const [image, setImage] = useState(null);
@@ -11,7 +14,7 @@ const UniformeEvaluation = () => {
       if (!image) return;
 
       setLoading(true);
-      
+
       const formData = new FormData();
       formData.append('file', image);
 
@@ -36,32 +39,63 @@ const UniformeEvaluation = () => {
     };
 
     evaluateImage();
-  }, [image]); // Re-evaluate whenever `image` changes
+  }, [image]); 
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setImage(file);
-      setImagePreview(URL.createObjectURL(file)); // Create a preview of the image
+      setImagePreview(URL.createObjectURL(file));
     }
   };
 
   return (
-    <div>
-      <h1>Evaluate Image for Safety</h1>
-      <input type="file" accept="image/*" onChange={handleImageChange} />
-      <button onClick={() => {}} disabled={loading}>
-        {loading ? 'Processing...' : 'Evaluate Image'}
-      </button>
+    <div className="d-flex flex-column min-vh-100">
+      <Navbar />
+      <div className="container mt-5">
+        <div className="row justify-content-center">
+          <div className="col-md-8 text-center">
+            <h1 className="mb-4">Evaluar uniformes de Seguridad</h1>
+            <input 
+              type="file" 
+              accept="image/*" 
+              onChange={handleImageChange} 
+              className="form-control mb-3" 
+            />
 
-      {imagePreview && (
-        <div>
-          <h2>Image Preview:</h2>
-          <img src={imagePreview} alt="Selected" style={{ maxWidth: '100%', height: 'auto' }} />
+            {loading && (
+              <div className="mb-3">
+                <div className="spinner-border text-primary" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
+
+            {imagePreview && !loading && (
+              <div className="mb-3">
+                <h2>Image Preview:</h2>
+                <img 
+                  src={imagePreview} 
+                  alt="Selected" 
+                  style={{ 
+                    maxWidth: '300px', 
+                    maxHeight: '300px', 
+                    border: result === 'Falla en el uniforme' ? '5px solid red' : '5px solid #dee2e6' 
+                  }} 
+                  className="img-thumbnail"
+                />
+              </div>
+            )}
+
+            {result && (
+              <div className={`alert ${result === 'Falla en el uniforme' ? 'alert-danger' : 'alert-info'} mt-3`}>
+                <p>{result}</p>
+              </div>
+            )}
+          </div>
         </div>
-      )}
-
-      {result && <p>Result: {result}</p>}
+      </div>
+      <Footer />
     </div>
   );
 };

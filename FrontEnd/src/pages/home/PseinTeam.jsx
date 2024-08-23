@@ -5,6 +5,7 @@ import DenunciasyEmergencias from "../../components/DenunciasyEmergencias/DyE";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import { CounterWA } from "../../components/Counter/CounterWA";
 import { TaskManager } from "../../components/Gestiondetareas/Taskmanager";
+import { EmergencyModal } from "../../components/EmergencyModal/EmergencyModal";
 
 export const PseinTeam = () => {
   return (
@@ -15,6 +16,7 @@ export const PseinTeam = () => {
       <div className="content">
         <TaskManager />
         <Dashboard />
+        <EmergencyModal />
         <DenunciasyEmergencias />
         <CounterWA />
       </div>
