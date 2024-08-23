@@ -35,8 +35,8 @@ app.include_router(alert_router)
 app.include_router(user_rutes)
 app.include_router(auth_router)
 app.include_router(permiso_rutes)
-#app.include_router(ia_router)
-#app.include_router(ia_ambiente_router)
+app.include_router(ia_router)
+app.include_router(ia_ambiente_router)
 app.include_router(cloudinary_router) 
 
 
