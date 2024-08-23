@@ -1,0 +1,8 @@
+/* Asegúrate de que el footer siempre esté al fondo */
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa; /* Puedes personalizar el color de fondo */
+  padding: 1rem 0;
+}
