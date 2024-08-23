@@ -27,12 +27,16 @@ export const Perfil = () => {
                 <p>Número de Teléfono: +54 9 11 1234-5678</p>
                 <p>Departamento: Seguridad</p>
                 <p>Cargo: Inspector</p>
-                <button className="btn btn-primary mt-2">
-                  Modificar Datos
-                </button>
-                <button className="btn btn-outline-secondary mt-2 ms-2">
-                  Cambiar Contraseña
-                </button>
+                <a href="/Changepersonaldata">
+                  <button className="btn btn-primary mt-2">
+                    Modificar Datos
+                  </button>
+                </a>
+                <a href="/Changepassword">
+                  <button className="btn btn-outline-secondary mt-2 ms-2">
+                    Cambiar Contraseña
+                  </button>
+                </a>
                 <button className="btn btn-outline-secondary mt-2 ms-2">
                   Cambiar Foto de Perfil
                 </button>

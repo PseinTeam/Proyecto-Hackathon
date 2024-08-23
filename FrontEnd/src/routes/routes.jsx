@@ -18,6 +18,9 @@ import { useLocation } from "react-router-dom";
 import { useLoading } from "../context/LoadingContext.jsx";
 import UniformeEvaluation from "../components/IaHerramientas/UniformeEvaluation.jsx";
 import AmbienteEvaluation from "../components/IaHerramientas/AmbienteEvaluation.jsx";
+import { Changepersonaldata } from "../pages/Changepersonaldata.jsx";
+import { Changepassword } from "../pages/Changepassword.jsx";
+import { Notallowed } from "../components/Accesonopermitido/Notallowed.jsx";
 
 export const RoutesComponent = () => {
   const location = useLocation();
@@ -51,6 +54,9 @@ export const RoutesComponent = () => {
       <Route path="/Awareness" element={<Awareness />} />
       <Route path="/Uniformes" element={<UniformeEvaluation />} />
       <Route path="/Ambiente" element={<AmbienteEvaluation />} />
+      <Route path="/Changepersonaldata" element={<Changepersonaldata />} />
+      <Route path="/Changepassword" element={<Changepassword />} />
+      <Route path="/Notallowed" element={<Notallowed />} />
     </Routes>
   );
 };
