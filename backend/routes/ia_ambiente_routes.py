@@ -7,7 +7,7 @@ import numpy as np
 router = APIRouter()
 
 # Cargar el modelo
-model = tf.keras.models.load_model('C:/Users/Diego Jara/Desktop/Pruebas IA imagenes/IA_ambiente/modelos/modelo_seguridad.h5')
+model = tf.keras.models.load_model('/home/diego/Escritorio/IAs/IA-reconocimiento/IA_ambiente/modelos/modelo_seguridad.h5')
 
 def preprocess_image(img_path):
     img = image.load_img(img_path, target_size=(224, 224))
