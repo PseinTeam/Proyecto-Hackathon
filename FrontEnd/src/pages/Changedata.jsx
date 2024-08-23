@@ -1,66 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../public/css/pages/Login.css";
+import { AuthContext } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export const Changedata = () => {
+
+  const { user } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    telefono: "",
-    password: "",
-    confirmPassword: "",
+    id: '',
+    new_name: "",
+    new_email: "",
+    new_password: "",
+    new_phone: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const validatePasswords = (e) => {
-    const { password, confirmPassword } = formData;
-    const errorMessage = document.getElementById("error-message");
-
-    if (password !== confirmPassword) {
-      e.preventDefault(); // Previene el envío del formulario
-      errorMessage.textContent = "Las contraseñas no coinciden.";
-    } else {
-      errorMessage.textContent = "";
+  useEffect(() => {
+    if (user?.id) {
+      setFormData(prevFormData => ({ ...prevFormData, id: user.id }));
     }
-  };
-
+  }, [user]); // Dependencia en user
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    validatePasswords(e);
+    
+    if (formData.id != ''){
 
-    // Si hay un mensaje de error, no enviar el formulario
-    const errorMessage = document.getElementById("error-message").textContent;
-    if (errorMessage) return;
-
-    try {
-      const response = await fetch("/Usuarios/user/updateData", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: 1, // Cambia esto según el ID del usuario en tu aplicación
-          new_name: formData.fullName || null,
-          new_email: formData.email || null,
-          new_password: formData.password || null,
-          new_phone: formData.telefono || null,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al actualizar los datos");
+      try {
+        console.log('Antes del fetch', formData);
+        const response = await fetch(`http://127.0.0.1:8000/Usuarios/user/updateData`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.detail || "Error al actualizar los datos");
+        }
+  
+        const result = await response.json();
+        console.log(result.message);
+        navigate("/");
+        // Puedes redirigir o mostrar un mensaje de éxito aquí
+      } catch (error) {
+        console.error("Error:", error);
+        // Muestra un mensaje de error al usuario
+        document.getElementById("error-message").textContent = error.message;
       }
+    } 
 
-      const result = await response.json();
-      console.log(result.message);
-      // Puedes redirigir o mostrar un mensaje de éxito aquí
-    } catch (error) {
-      console.error("Error:", error);
-      // Muestra un mensaje de error al usuario
-    }
+
   };
 
   return (
@@ -73,60 +71,48 @@ export const Changedata = () => {
             <input
               type="text"
               className="form-control"
-              id="fullName"
+              id="new_name"
               placeholder="Nombre Completo"
-              value={formData.fullName}
+              value={formData.new_name}
               onChange={handleChange}
             />
-            <label htmlFor="fullName">Nombre Completo</label>
+            <label htmlFor="new_name">Nombre Completo</label>
           </div>
 
           <div className="form-floating mb-1">
             <input
               type="email"
               className="form-control"
-              id="email"
+              id="new_email"
               placeholder="Correo Electronico"
-              value={formData.email}
+              value={formData.new_email}
               onChange={handleChange}
             />
-            <label htmlFor="email">Correo Electronico</label>
+            <label htmlFor="new_email">Correo Electronico</label>
           </div>
 
           <div className="form-floating mb-1">
             <input
               type="tel"
               className="form-control"
-              id="telefono"
+              id="new_phone"
               placeholder="Número de Teléfono"
-              value={formData.telefono}
+              value={formData.new_phone}
               onChange={handleChange}
             />
-            <label htmlFor="telefono">Número de Teléfono</label>
+            <label htmlFor="new_phone">Número de Teléfono</label>
           </div>
 
           <div className="form-floating mb-1">
             <input
               type="password"
               className="form-control"
-              id="password"
+              id="new_password"
               placeholder="Contraseña"
-              value={formData.password}
+              value={formData.new_password}
               onChange={handleChange}
             />
-            <label htmlFor="password">Contraseña</label>
-          </div>
-
-          <div className="form-floating mb-1">
-            <input
-              type="password"
-              className="form-control"
-              id="confirmPassword"
-              placeholder="Repetir Contraseña"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-            />
-            <label htmlFor="confirmPassword">Repetir Contraseña</label>
+            <label htmlFor="new_password">Contraseña</label>
           </div>
 
           <div

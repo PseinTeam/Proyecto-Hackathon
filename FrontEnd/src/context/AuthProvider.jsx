@@ -54,6 +54,7 @@ export const AuthProvider = ({ children }) => {
                 const data = await response.json();
                 if (data && data.Usuario){
                     setUserId(data.Usuario.id);
+                    console.log(data.Usuario.id)
                 }
             }
             catch(error){
@@ -83,6 +84,7 @@ export const AuthProvider = ({ children }) => {
             if (response.ok){
                 const data = await response.json();
                 setUser(data.Usuario);
+                console.log(user)
             }
         } catch(error){
             console.error("Error fetching user:", error);

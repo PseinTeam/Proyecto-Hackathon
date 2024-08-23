@@ -10,7 +10,6 @@ import { AuthProvider } from "./context/AuthProvider.jsx";
 import { LoadingProvider } from "./context/LoadingContext.jsx"; // Importar el LoadingProvider
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <StrictMode>
     <LoadingProvider>
       <BrowserRouter>
         <AuthProvider>
@@ -22,5 +21,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </AuthProvider>
       </BrowserRouter>
     </LoadingProvider>
-  </StrictMode>
 );
