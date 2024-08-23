@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { PseinTeam } from "../pages/home/PseinTeam.jsx";
 import { Login } from "../pages/Login.jsx";
@@ -14,8 +14,22 @@ import { Perfil } from "../pages/Perfil.jsx";
 import { Securitymeasurements } from "../pages/Securitymeasurements.jsx";
 import { Constructionslaws } from "../pages/Constructionslaws.jsx";
 import { Awareness } from "../pages/Awareness.jsx";
+import { useLocation } from "react-router-dom";
+import { useLoading } from "../context/LoadingContext.jsx";
 
 export const RoutesComponent = () => {
+  const location = useLocation();
+  const { setIsLoading } = useLoading();
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); // Simula una carga de 1 segundo al cambiar de ruta
+
+    return () => clearTimeout(timer);
+  }, [location, setIsLoading]);
+
   return (
     <Routes>
       <Route path="/" element={<PseinTeam />} />

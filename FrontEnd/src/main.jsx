@@ -7,17 +7,20 @@ import RoutesComponent from "./routes/routes.jsx";
 import { WebSocketProvider } from "./context/WebSocketContext.jsx";
 import { NotificationProvider } from "./context/NotificationContext.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
+import { LoadingProvider } from "./context/LoadingContext.jsx"; // Importar el LoadingProvider
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <WebSocketProvider>
-          <NotificationProvider>
-            <RoutesComponent />
-          </NotificationProvider>
-        </WebSocketProvider>
-      </AuthProvider>
-    </BrowserRouter>
+    <LoadingProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <WebSocketProvider>
+            <NotificationProvider>
+              <RoutesComponent />
+            </NotificationProvider>
+          </WebSocketProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </LoadingProvider>
   </StrictMode>
 );
