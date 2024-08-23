@@ -12,7 +12,7 @@ export const Register = () => {
 
     // Crear objeto con datos del formulario
     const requestData = {
-      num_usuarios: numUsuarios,
+      num_usuarios: parseInt(numUsuarios, 10),  // Asegúrate de convertir a número entero
       puesto_trabajo: puestoTrabajo,
     };
 

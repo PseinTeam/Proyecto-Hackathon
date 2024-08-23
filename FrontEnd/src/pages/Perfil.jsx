@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar } from "../components/header/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "../components/Footer/Footer";
+import { EmergencyModal } from "../components/EmergencyModal/EmergencyModal";
 
 export const Perfil = () => {
   return (
@@ -79,6 +80,7 @@ export const Perfil = () => {
         </div>
       </div>
       <Footer />
+      <EmergencyModal />
     </div>
   );
 };

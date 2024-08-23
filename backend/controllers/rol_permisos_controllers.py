@@ -149,11 +149,13 @@ def crear_super_admin(db: Session):
             "email": 'asdasdasda@gmail.com',
             "password": 'aña',
             "puesto_trabajo": 'Administrador',
-            'id_role': 1
+            'id_role': 1,
+            'telefono': '1234567890'
         }
         create_user(UserCreate(**user_data), db)
-    except Exception:
+    except Exception as e:
         db.rollback()
+        print(f"Error creating super admin: {e}")
         raise ValueError("Error al crear usuario")
     finally:
         db.close()

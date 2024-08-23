@@ -21,11 +21,13 @@ async def create_users(request: CreateUsersRequest, db: Session = Depends(get_db
     for i in range(request.num_usuarios):
         password = "123456"  # Contraseña predeterminada
         email = f"email{random.randint(1, 100000)}@predeterminado.com"  # Generar email único
+        phone_number = f"+1{random.randint(1000000000, 9999999999)}"  # Generar teléfono único
         user_data = {
             "full_name": f"Usuario N{i+1}",
             "email": email,
             "password": password,
             "puesto_trabajo": request.puesto_trabajo,
+            "telefono": phone_number,
             'id_role': 4
         }
         if user_data['puesto_trabajo'] == 'Area de seguridad':
@@ -41,6 +43,7 @@ async def create_users(request: CreateUsersRequest, db: Session = Depends(get_db
             raise HTTPException(status_code=500, detail=f"Error al crear usuario: {e}")
             
     return {"status": "success", "users": users}
+
 
 # Ruta para iniciar sesión
 @user_rutes.post('/login')

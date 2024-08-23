@@ -7,7 +7,6 @@ import { CerrarSesion } from "../../components/CerrarSesion.jsx";
 export const Navbar = () => {
   const { state, user } = useContext(AuthContext);
 
-console.log(user);
 
   return (
     <div>
@@ -74,9 +73,10 @@ console.log(user);
                       </li>
                     </>
                   )}
-                  {/* Panel de emergencias solo para segurity */}
+                  {/* Panel de emergencias visible para admin, super_admin y segurity */}
                   {(user?.rol?.nombre === "admin" ||
-                    user?.rol?.nombre === "super_admin") && (
+                    user?.rol?.nombre === "super_admin" ||
+                    user?.rol?.nombre === "segurity") && (
                     <li>
                       <a className="dropdown-item" href="/PanelEmergencias">
                         Panel de emergencias
@@ -93,20 +93,28 @@ console.log(user);
                 <a
                   className="nav-link dropdown-toggle px-2"
                   href="#"
-                  id="panelDropdown"
+                  id="toolsDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Herramientas
                 </a>
-                <ul className="dropdown-menu" aria-labelledby="panelDropdown">
+                <ul className="dropdown-menu" aria-labelledby="toolsDropdown">
                   <li>
                     <a
-                      href="/Ambientrecognicion"
+                      href="/Ambiente"
                       className="dropdown-item"
                     >
                       Reconocimiento de ambiente
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/Uniformes"
+                      className="dropdown-item"
+                    >
+                      Reconocimiento de uniformes
                     </a>
                   </li>
                   <li>

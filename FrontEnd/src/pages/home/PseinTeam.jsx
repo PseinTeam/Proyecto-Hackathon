@@ -5,6 +5,7 @@ import DenunciasyEmergencias from "../../components/DenunciasyEmergencias/DyE";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import { CounterWA } from "../../components/Counter/CounterWA";
 import { TaskManager } from "../../components/Gestiondetareas/Taskmanager";
+import { EmergencyModal } from "../../components/EmergencyModal/EmergencyModal";
 import Loadingscreen from "../../components/Loaders/Loadingscreen.jsx"; // Importar el componente Loadingscreen
 import { useLoading } from "../../context/LoadingContext.jsx"; // Importar el contexto LoadingContext
 
@@ -28,6 +29,7 @@ export const PseinTeam = () => {
       <div className="content">
         <TaskManager />
         <Dashboard />
+        <EmergencyModal />
         <DenunciasyEmergencias />
         <CounterWA />
       </div>
