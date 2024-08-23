@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import DenunciasyEmergencias from "../DenunciasyEmergencias/DyE";
+import "/public/css/components/inputtext.css";
+import "/public/css/components/button.css";
 
 export const CounterWA = () => {
   // Estado para el contador
@@ -8,9 +11,14 @@ export const CounterWA = () => {
     const savedCount = localStorage.getItem("hourlyCounter");
     const lastUpdated = localStorage.getItem("lastUpdated");
 
-    // Verificar si el contador fue actualizado en la última hora
+    if (savedCount === null || lastUpdated === null) {
+      return 0; // Si no hay datos en localStorage, inicializa el contador en 0
+    }
+
     const now = new Date();
     const lastUpdateTime = new Date(lastUpdated);
+
+    // Verificar si el contador fue actualizado en la última hora
     if (now - lastUpdateTime < 3600000) {
       // 3600000 ms = 1 hora
       return parseInt(savedCount, 10) || 0;
@@ -19,22 +27,15 @@ export const CounterWA = () => {
     }
   });
 
-  // useEffect para incrementar el contador automáticamente cada hora
   useEffect(() => {
     const intervalId = setInterval(() => {
-      const now = new Date();
-      const lastUpdateTime = new Date(localStorage.getItem("lastUpdated"));
-
-      if (now - lastUpdateTime >= 3600000) {
-        // 3600000 ms = 1 hora
-        setCount((prevCount) => {
-          const newCount = prevCount + 1;
-          localStorage.setItem("hourlyCounter", newCount);
-          localStorage.setItem("lastUpdated", now.toISOString());
-          return newCount;
-        });
-      }
-    }, 60000); // Verifica cada minuto
+      setCount((prevCount) => {
+        const newCount = prevCount + 1;
+        localStorage.setItem("hourlyCounter", newCount);
+        localStorage.setItem("lastUpdated", new Date().toISOString());
+        return newCount;
+      });
+    }, 3000); // Verifica cada 30 segundos
 
     return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
   }, []);
@@ -48,15 +49,16 @@ export const CounterWA = () => {
 
   return (
     <div className="container text-center mt-5">
+      {/* Pasa la función resetCounter como prop a DenunciasyEmergencias */}
+      <DenunciasyEmergencias onEmergency={resetCounter} />
       <div className="card" style={{ border: "none" }}>
         <div className="card-body">
-          <h1 className="card-title">Dias Sin Emergencias</h1>
+          <h1 className="card-title">Días Sin Emergencias</h1>
           <p className="card-text display-4">{count}</p>
-          <button className="btn btn-danger" onClick={resetCounter}>
-            Reiniciar Contador
-          </button>
         </div>
       </div>
     </div>
   );
 };
+
+export default CounterWA;

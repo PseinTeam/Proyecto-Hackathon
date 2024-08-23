@@ -76,6 +76,7 @@
 
 .buttonEmergencia:hover {
   background-color: transparent;
+  outline: 3px #ff0000 solid;
 }
 
 .buttonEmergencia:hover .text {

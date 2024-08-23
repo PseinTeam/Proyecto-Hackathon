@@ -2,7 +2,7 @@ import React from "react";
 import "/public/css/components/inputtext.css";
 import "/public/css/components/button.css";
 
-export const DenunciasyEmergencias = () => {
+export const DenunciasyEmergencias = ({ onEmergency }) => {
   return (
     <div className="SECCION">
       <section id="Denuncias">
@@ -12,7 +12,10 @@ export const DenunciasyEmergencias = () => {
             {/* BOTON DE EMERGENCIA */}
             <div className="buttonwrapper">
               <h2>Boton de Emergencias</h2>
-              <button className="buttonEmergencia">
+              <button
+                className="buttonEmergencia"
+                onClick={onEmergency} // Reinicia el contador al hacer clic
+              >
                 <p className="text">¡EMERGENCIA!</p>
               </button>
             </div>

@@ -30,7 +30,6 @@ export const PseinTeam = () => {
         <TaskManager />
         <Dashboard />
         <EmergencyModal />
-        <DenunciasyEmergencias />
         <CounterWA />
       </div>
       <footer>
