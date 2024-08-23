@@ -96,6 +96,9 @@ export const Login = () => {
               <option className="Options" value="Administrador">
                 Administrador
               </option>
+              <option className="Options" value="Admin">
+                Admin
+              </option>
               <option className="Options" value="Area de seguridad">
                 Area de seguridad
               </option>

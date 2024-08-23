@@ -14,6 +14,9 @@ import { Perfil } from "../pages/Perfil.jsx";
 import { Securitymeasurements } from "../pages/Securitymeasurements.jsx";
 import { Constructionslaws } from "../pages/Constructionslaws.jsx";
 import { Awareness } from "../pages/Awareness.jsx";
+import UniformeEvaluation from "../components/IaHerramientas/UniformeEvaluation.jsx";
+import AmbienteEvaluation from "../components/IaHerramientas/AmbienteEvaluation.jsx";
+
 
 export const RoutesComponent = () => {
   return (
@@ -33,6 +36,8 @@ export const RoutesComponent = () => {
       <Route path="/Securitymeasurements" element={<Securitymeasurements />} />
       <Route path="/Constructionslaws" element={<Constructionslaws />} />
       <Route path="/Awareness" element={<Awareness />} />
+      <Route path="/Uniformes" element={<UniformeEvaluation />} />
+      <Route path="/Ambiente" element={<AmbienteEvaluation />} />
     </Routes>
   );
 };
