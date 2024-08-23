@@ -1,55 +1,58 @@
-import { createContext, useReducer, useEffect,useState  } from "react";
+import { createContext, useReducer, useEffect, useState } from "react";
 import { authReducer } from "../context/authReducer";
 import { types } from "../types/types";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const token = localStorage.getItem('token') || null;
-    const [userId, setUserId] = useState('');
-    const [user, setUser] = useState({});
+  const token = localStorage.getItem("token") || null;
+  const [userId, setUserId] = useState("");
+  const [user, setUser] = useState({});
 
-    const inicialState = {
-        logged: false,
-        token: null,
-    };
+  const inicialState = {
+    logged: false,
+    token: null,
+  };
 
-    const [state, dispatch] = useReducer(authReducer, inicialState);
+  const [state, dispatch] = useReducer(authReducer, inicialState);
 
-    useEffect(() =>{
-        const validateToken = async () => {
-            if (!token){
-                dispatch({
-                    type: types.LOGOUT
-                });
-                return;
-            }
+  useEffect(() => {
+    const validateToken = async () => {
+      if (!token) {
+        dispatch({
+          type: types.LOGOUT,
+        });
+        return;
+      }
 
-            dispatch({
-                type: types.LOGIN,
-                payload: {
-                    token
-                }
-            })
+      dispatch({
+        type: types.LOGIN,
+        payload: {
+          token,
+        },
+      });
 
-            try{
-                const response = await fetch('http://127.0.0.1:8000/auth/validate/token',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`
-                    },
-                });
-            
-                if (!response.ok){
-                    dispatch({
-                        type: types.LOGOUT
-                    });
-                    localStorage.removeItem('token');
-                    setUserId('');
-                    setUser({});
-                    return;
-                }
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/auth/validate/token",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          dispatch({
+            type: types.LOGOUT,
+          });
+          localStorage.removeItem("token");
+          setUserId("");
+          setUser({});
+          return;
+        }
 
                 const data = await response.json();
                 if (data && data.Usuario){
@@ -65,21 +68,24 @@ export const AuthProvider = ({ children }) => {
         };
 
     validateToken();
-    }, [token]);
+  }, [token]);
 
-    useEffect(()=>{
-        if (!userId){
-            return;
-        }
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
 
-        const fetchUser = async () =>{
-            try{
-            const response = await fetch(`http://127.0.0.1:8000/Usuarios/user/id/${userId}`,{
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8000/Usuarios/user/id/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
             if (response.ok){
                 const data = await response.json();
@@ -94,29 +100,26 @@ export const AuthProvider = ({ children }) => {
     },[userId])
 
 
-    const login = (token) => {
-        localStorage.setItem('token', token);
-        dispatch({
-            type: types.LOGIN,
-            payload: {
-                token
-            }
-        });
-    };
+  const login = (token) => {
+    localStorage.setItem("token", token);
+    dispatch({
+      type: types.LOGIN,
+      payload: {
+        token,
+      },
+    });
+  };
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        dispatch({
-            type: types.LOGOUT
-        });
-    };
+  const logout = () => {
+    localStorage.removeItem("token");
+    dispatch({
+      type: types.LOGOUT,
+    });
+  };
 
-    return(
-        <AuthContext.Provider
-        value={{login, logout, state, user}}
-        >
-            {children}
-        </AuthContext.Provider>
-    )
-
+  return (
+    <AuthContext.Provider value={{ login, logout, state, user }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

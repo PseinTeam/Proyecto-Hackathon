@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from '../header/Navbar';
 import { Footer } from '../Footer/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { EmergencyModal } from '../EmergencyModal/EmergencyModal';
 
 const AmbienteEvaluation = () => {
   const [image, setImage] = useState(null);
@@ -96,6 +97,7 @@ const AmbienteEvaluation = () => {
         </div>
       </div>
       <Footer />
+      <EmergencyModal />
     </div>
   );
 };

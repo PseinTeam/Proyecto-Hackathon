@@ -25,8 +25,10 @@ const generateRandomData = (numUsers) => {
   const data = [];
   for (let i = 0; i < numUsers; i++) {
     data.push({
-      horasTrabajadas: hoursTypes[Math.floor(Math.random() * hoursTypes.length)],
-      accidentes: accidentsTypes[Math.floor(Math.random() * accidentsTypes.length)],
+      horasTrabajadas:
+        hoursTypes[Math.floor(Math.random() * hoursTypes.length)],
+      accidentes:
+        accidentsTypes[Math.floor(Math.random() * accidentsTypes.length)],
       asistencia: Math.random() > 0.5 ? "Asistencia" : "Inasistencia",
     });
   }
@@ -103,7 +105,7 @@ const Dashboard = () => {
         <Grid item xs={12} sm={6} md={4}>
           <Paper elevation={3} style={{ padding: "16px" }}>
             <Typography variant="h6">Distribución de Asistencia</Typography>
-            <PieChart width={300} height={250}>
+            <PieChart width={300} height={350}>
               <Pie
                 data={pieAsistenciaData}
                 dataKey="value"
@@ -126,7 +128,7 @@ const Dashboard = () => {
         <Grid item xs={12} sm={6} md={4}>
           <Paper elevation={3} style={{ padding: "16px" }}>
             <Typography variant="h6">Distribución de Accidentes</Typography>
-            <PieChart width={300} height={250}>
+            <PieChart width={300} height={350}>
               <Pie
                 data={pieAccidentesData}
                 dataKey="value"
@@ -148,8 +150,10 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Paper elevation={3} style={{ padding: "16px" }}>
-            <Typography variant="h6">Distribución de Horas Trabajadas</Typography>
-            <PieChart width={300} height={250}>
+            <Typography variant="h6">
+              Distribución de Horas Trabajadas
+            </Typography>
+            <PieChart width={300} height={350}>
               <Pie
                 data={pieHorasTrabajadasData}
                 dataKey="value"

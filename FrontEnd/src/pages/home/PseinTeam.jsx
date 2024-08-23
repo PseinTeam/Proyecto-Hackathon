@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Navbar } from "../../components/header/Navbar";
 import { Footer } from "../../components/Footer/Footer";
 import DenunciasyEmergencias from "../../components/DenunciasyEmergencias/DyE";
@@ -25,15 +25,14 @@ export const PseinTeam = () => {
 
   return (
     <body>
-      <Loadingscreen /> {/* Incluir el componente Loadingscreen */}
+      <Loadingscreen />
       <header>
         <Navbar />
       </header>
       <div className="content">
         <TaskManager />
+        {user?.rol?.nombre === "segurity" && <Dashboard />}
         <EmergencyModal />
-        {user?.rol?.nombre === 'segurity' && <Dashboard />}
-        <DenunciasyEmergencias />
         <CounterWA />
       </div>
       <footer>

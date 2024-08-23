@@ -17,6 +17,7 @@
     "@mui/material": "^5.16.7",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "bootstrap": "^5.3.3",
+    "cloudinary-react": "^1.8.1",
     "date-fns": "^3.6.0",
     "frontend": "file:",
     "react": "^18.3.1",

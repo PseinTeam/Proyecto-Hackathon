@@ -8,7 +8,6 @@ export const AccessDenied = () => {
       <p style={styles.message}>
         You do not have permission to view this page.
       </p>
-      <Link to="/" style={styles.link}>Return to Home</Link>
     </div>
   );
 };

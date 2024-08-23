@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navbar } from "../header/Navbar.jsx";
 import Footer from "../Footer/Footer.jsx";
 import { Container, Table, Button, Alert } from "react-bootstrap";
+import { EmergencyModal } from "../EmergencyModal/EmergencyModal.jsx";
 
 export const Employeepanel = () => {
   const [users, setUsers] = useState([]);
@@ -143,6 +144,7 @@ export const Employeepanel = () => {
         )}
       </Container>
       <Footer />
+      <EmergencyModal />
     </div>
   );
 };

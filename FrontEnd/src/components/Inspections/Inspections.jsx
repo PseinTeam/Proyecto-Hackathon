@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../public/css/pages/Inspections.css";
 import { Navbar } from "../header/Navbar";
 import Footer from "../Footer/Footer";
+import { EmergencyModal } from "../EmergencyModal/EmergencyModal";
 
 export const InspectionForm = () => {
   const [employerData, setEmployerData] = useState({
@@ -25,6 +26,32 @@ export const InspectionForm = () => {
   });
 
   const [inspectionResults, setInspectionResults] = useState([]);
+
+  const [uploadingImage, setUploadingImage] = useState(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+
+  // UseEffect para cargar la imagen a Cloudinary
+  useEffect(() => {
+    if (uploadingImage) {
+      const uploadImage = async () => {
+        const formData = new FormData();
+        formData.append("file", uploadingImage);
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/upload/", {
+            method: "POST",
+            body: formData,
+          });
+          const data = await response.json();
+          setUploadedImageUrl(data.url); // El backend te devuelve la URL
+        } catch (error) {
+          console.error("Error uploading image:", error);
+        }
+      };
+
+      uploadImage();
+    }
+  }, [uploadingImage]);
 
   const handleEmployerChange = (e) => {
     setEmployerData({
@@ -56,6 +83,8 @@ export const InspectionForm = () => {
         setInspectionResults(updatedResults);
       };
       reader.readAsDataURL(file);
+      // Set image to be uploaded
+      setUploadingImage(file);
     }
   };
 
@@ -98,6 +127,7 @@ export const InspectionForm = () => {
     console.log("Employer Data:", employerData);
     console.log("Inspection Data:", inspectionData);
     console.log("Inspection Results:", inspectionResults);
+    console.log("Uploaded Image URL:", uploadedImageUrl);
   };
 
   const printForm = () => {
@@ -114,7 +144,7 @@ export const InspectionForm = () => {
         <form className="inspection-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label" htmlFor="centroTrabajo">
-              Centro de Trabajo/Proyecto/Contrato:
+              Centro de Trabajo:
             </label>
             <input
               className="form-input"
@@ -127,7 +157,7 @@ export const InspectionForm = () => {
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="razonSocial">
-              Razón Social o Denominación:
+              Razón Social:
             </label>
             <input
               className="form-input"
@@ -140,7 +170,7 @@ export const InspectionForm = () => {
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="ruc">
-              DNI:
+              RUC:
             </label>
             <input
               className="form-input"
@@ -153,7 +183,7 @@ export const InspectionForm = () => {
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="domicilio">
-              DOMICILIO:
+              Domicilio:
             </label>
             <input
               className="form-input"
@@ -166,7 +196,7 @@ export const InspectionForm = () => {
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="tipoActividad">
-              Tipo de Actividad Económica:
+              Tipo de Actividad:
             </label>
             <input
               className="form-input"
@@ -179,11 +209,11 @@ export const InspectionForm = () => {
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="numTrabajadores">
-              N° de Trabajadores en el Centro Laboral:
+              Número de Trabajadores:
             </label>
             <input
               className="form-input"
-              type="text"
+              type="number"
               id="numTrabajadores"
               name="numTrabajadores"
               value={employerData.numTrabajadores}
@@ -285,7 +315,7 @@ export const InspectionForm = () => {
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="firmaResponsable">
-              Firma Responsable:
+              Firma del Responsable:
             </label>
             <input
               className="form-input"
@@ -303,7 +333,7 @@ export const InspectionForm = () => {
               <h3 className="result-title">Resultado {index + 1}</h3>
               <div className="form-group">
                 <label className="form-label" htmlFor={`descripcion-${index}`}>
-                  Descripción del Hecho, Acto o Condición Subestandar:
+                  Descripción:
                 </label>
                 <input
                   className="form-input"
@@ -321,7 +351,7 @@ export const InspectionForm = () => {
                   className="form-label"
                   htmlFor={`relacionadoCon-${index}`}
                 >
-                  Relacionado con:
+                  Relacionado Con:
                 </label>
                 <input
                   className="form-input"
@@ -354,7 +384,7 @@ export const InspectionForm = () => {
                   className="form-label"
                   htmlFor={`actoCondicion-${index}`}
                 >
-                  Acto o Condición Subestándar:
+                  Acto/Condición:
                 </label>
                 <input
                   className="form-input"
@@ -379,7 +409,11 @@ export const InspectionForm = () => {
                   onChange={(e) => handleFileChange(index, e)}
                 />
                 {result.evidencia && (
-                  <img src={result.evidencia} alt={`Evidencia ${index + 1}`} />
+                  <img
+                    src={result.evidencia}
+                    alt={`Evidencia ${index + 1}`}
+                    className="evidence-image"
+                  />
                 )}
               </div>
               <div className="form-group">
@@ -387,7 +421,7 @@ export const InspectionForm = () => {
                   className="form-label"
                   htmlFor={`altoMedioBajo-${index}`}
                 >
-                  Prioridad (Alto, Medio, Bajo):
+                  Nivel (Alto/Medio/Bajo):
                 </label>
                 <select
                   className="form-input"
@@ -398,17 +432,11 @@ export const InspectionForm = () => {
                     handleResultChange(index, "altoMedioBajo", e.target.value)
                   }
                 >
-                  <option value="bajo">Bajo</option>
-                  <option value="medio">Medio</option>
+                  <option value="">Seleccione</option>
                   <option value="alto">Alto</option>
+                  <option value="medio">Medio</option>
+                  <option value="bajo">Bajo</option>
                 </select>
-                <div
-                  className="indicador"
-                  style={{ backgroundColor: getColor(result.altoMedioBajo) }}
-                >
-                  {result.altoMedioBajo.charAt(0).toUpperCase() +
-                    result.altoMedioBajo.slice(1)}
-                </div>
               </div>
               <div className="form-group">
                 <label
@@ -516,12 +544,6 @@ export const InspectionForm = () => {
                   name="evidenciaLevantamiento"
                   onChange={(e) => handleFileChange(index, e)}
                 />
-                {result.evidenciaLevantamiento && (
-                  <img
-                    src={result.evidenciaLevantamiento}
-                    alt={`Evidencia de Levantamiento ${index + 1}`}
-                  />
-                )}
               </div>
               <div className="form-group">
                 <label className="form-label" htmlFor={`estado-${index}`}>
@@ -555,6 +577,7 @@ export const InspectionForm = () => {
         </form>
       </div>
       <Footer />
+      <EmergencyModal />
     </div>
   );
 };
