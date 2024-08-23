@@ -6,13 +6,15 @@ export const ProtectRoutes = ({ requiredRole, loggedInRedirect }) => {
   const { state, user } = useContext(AuthContext);
 
   if (loggedInRedirect && state.logged) {
+    console.log(state.logged);
     // Si el usuario ya está autenticado y trata de acceder a /login, redirigir a la página de inicio
     return <Navigate to="/" />;
+    s;
   }
 
   if (!state.logged && !loggedInRedirect) {
     // Si el usuario no está autenticado y trata de acceder a una ruta protegida, redirigir al inicio de sesión
-    return <Navigate to="/login" />;
+    return <Navigate to="/Login" />;
   }
 
   if (requiredRole && user.rol.nombre !== requiredRole) {
