@@ -59,9 +59,10 @@ async def login_user(login_request: LoginRequest, db: Session = Depends(get_db))
     user_data = {
         "id": user.id,
     }
-
+    print(user_data)
     # Generar un token JWT y devolverlo en la respuesta
     token = write_token(user_data)
+    print(token)
     return token
 
 # Ruta para actualizar los datos del usuario (nombre, email, contraseña)
